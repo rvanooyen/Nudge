@@ -1,3 +1,19 @@
-var url = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.min.json"
+var apiKey = "6d29c9cf5737b60b45473240";
+var url = "https://v6.exchangerate-api.com/v6/" + apiKey + "/latest/USD";
 
-var key = "6d29c9cf5737b60b45473240"
+var exchangeRate = function() {
+    fetch(url)
+        .then(function(response) {
+            if (response.ok) {                
+                return response.json();
+            } else {
+                alert("Error: " + response.statusText);
+            }                       
+        })
+        .then(function(response) {
+            console.log(response);           
+        });
+}
+
+exchangeRate();
+
