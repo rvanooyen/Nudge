@@ -91,7 +91,7 @@
 
 
 
-var cityFormEl = document.querySelector("#user-form");
+var cityFormEl = document.querySelector("#city-form");
 var nameInputEl = document.querySelector("#city-name");
 
 var cityContainerEl = document.querySelector("#city-container");
