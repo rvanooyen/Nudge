@@ -1,13 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css"
+        integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Nudge</title>
 </head>
+
 <body>
+
+  <main class="flex-row justify-space-between">
+    <div class="col-12 col-md-4">
+        <div class="card">
+            <h3 class="card-header text-uppercase">Search By City</h3>
+            <form id="user-form" class="card-body">
+              <label class="form-label" for="username">Enter City Name</label>
+              <input name="cityname" id="city-name" type="text" autofocus="true" class="form-input" />
+              <button type="submit" class="btn">Get City Info</button>
+            </form>
+          </div>
+
+          <div class="col-12 col-md-8">
+            <h2 class="subtitle">Showing City Info for: <span id="city-search-term"></span></h2>
+            <div id="city-container" class="list-group"></div>
+            <div id="fidget-container" class="list-group"> div for the fidget</div>
+          </div>
+        
+            
+        </div>
+    </div>
+
+    <div class="col-12 col-md-8"></div>
+
+</main>
+
+
+ <!-- cost of living -->
+
+    <!-- <a class="teleport-widget-link" href="https://teleport.org/cities/bangkok/">Cost of living - Bangkok</a>
     
-<script src="/script.js"></script>
+    <script async class="teleport-widget-script" 
+    data-url="https://teleport.org/cities/bangkok/widget/costs/?currency=USD" 
+    data-max-width="770" data-height="500" 
+    src="https://teleport.org/assets/firefly/widget-snippet.min.js"></script> 
+
+    life quality-->
+    <!-- <a class="teleport-widget-link" href="https://teleport.org/cities/bangkok/">Life quality score - Bangkok</a>
+    <script async class="teleport-widget-script" 
+    data-url="https://teleport.org/cities/bangkok/widget/scores/?currency=USD" 
+    data-max-width="420" data-height="968" 
+    src="https://teleport.org/assets/firefly/widget-snippet.min.js"></script> --> 
+   
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src = "assets/JS/script.js"></script>
 </body>
+
 </html>
