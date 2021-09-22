@@ -26,34 +26,23 @@ var exchangeRate = function(baseCurrency, currencyCode) {
 
             // creates currency elements
             var pElConversionRate = document.createElement("p");
-            var pElTotalAmt = document.createElement("P");
-            // var todayForecastEl = document.createElement("div");
-            // var cityEl = document.createElement("p");
-            // var imgEl = document.createElement("img");
-            // var tempEl = document.createElement("p");
-            // var windEl = document.createElement("p");
-            // var humidityEl = document.createElement("p");
-            // var uvIndexEl = document.createElement("P");
-            // var fiveDayEl = document.createElement("div");
-            // var fiveDayTitleEl = document.createElement("h3");
-            // var cardDivEl = document.createElement("div");                                
+            var pElTotalAmt = document.createElement("P");                                         
 
             // sets currency properties
             pElConversionRate.setAttribute("id", "conversion-rate");
             pElConversionRate.textContent = "one " + baseCurrency + " = " + response.conversion_rate + " " + currencyCode;
             pElTotalAmt.setAttribute("id", "total-amount");
-            pElTotalAmt.textContent = "You have " + amount + currencyCode;
-            // todayForecastEl.setAttribute("id", "today-forecast");
-            // cityEl.setAttribute("id", "city-element");
-            // cityEl.setAttribute("class", "city-element");
-            // cityEl.textContent = city + "(" + moment().format("l") + ")";
-            // imgEl.setAttribute("src", "http://openweathermap.org/img/wn/" + response.daily[0].weather[0].icon + ".png");                                                
+            pElTotalAmt.textContent = "You have " + amount + currencyCode;     
             
-            // // appends current currency to HTML
+            // appends current currency to HTML
             $("#currency-container").append(pElConversionRate);
             $("#currency-container").append(pElTotalAmt);                       
         });
-}
+};
+
+var saveBucketList = function(country) {
+    localStorage.setItem("country", country);
+};
 
 $("#currency-btn").on("click", function(event) {
     // Resets the form
@@ -67,4 +56,25 @@ $("#currency-btn").on("click", function(event) {
         
     exchangeRate(baseCurrency, currencyCode);   
 });
+
+var loadBucketList = function() {
+    var savedLocales = localStorage.getItem("country");
+    // if there are no tasks, set tasks to an empty array and return out of the function
+    if (!savedTasks) {
+      return false;
+    }
+    console.log("Saved tasks found!");
+     
+    // parse into array of objects
+    savedLocales = JSON.parse(savedLocales);
+  
+    // loop through savedLocales array
+    for (var i = 0; i < savedLocales.length; i++) {
+        var countrylistEl = document.createElement("ul");
+        var countryEl = document.createElement("li");
+        countrylistEl.setAttribute("id", "countries-list");        
+        countryEl.textContent = country;
+        countrylistEl.append(countryEl);
+    }
+  };
 
