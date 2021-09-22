@@ -153,7 +153,9 @@ var getTeleportCity = function (city){
         console.log(data.name);
     });
 };
-
+ var currencyCode = data.currency_code;
+ var countryName = data.name;
+ 
 
 
 var displayCityInfo = function(city, searchTerm){
