@@ -277,31 +277,63 @@ for (var i=0; i< countries.length; i++) {
 };
 
 
-var getCountryCode;
+// user selects a home country and a destination country
 
-fetch("https://api.teleport.org/api/countries/iso_alpha2:US/").then(function(response){
+var homeCountry = [{"name":"United States","code":"US","currency":"USD"}];
+
+var destinationCountry = [{"name":"Cambodia","code":"KH","currency":"KHR"}];
+
+
+
+
+// find this home country's country code to do the API call from teleport
+
+var homeCountryCode = homeCountry[0].code;
+
+console.log(homeCountryCode);
+
+
+
+
+// find the destination country's currency
+
+var destinationCountryCurrency = destinationCountry[0].currency;
+
+console.log(destinationCountryCurrency);
+
+
+
+// do the API call
+
+var teleportCountry;
+
+fetch("https://api.teleport.org/api/countries/iso_alpha2:" + homeCountryCode +"/").then(function(response){
     if (response.ok) {
         return response.json();
     } else {
-        return Promise.reject(response);
+        // return Promise.reject(response);
+        return alert("404")
     }
 }).then(function (data) {
     // store the country code to a variable
-    getCountryCode = data;
+    teleportCountry = data;
 
-    var currencyCode = data.currency_code;
+    // convert the homecountry code to currency code
 
-    console.log(currencyCode);
+    var homeCountryCurrency = data.currency_code;
+
+    console.log(homeCountryCurrency);
 
     // fetch the exchange code API
     var apiKey = "6d29c9cf5737b60b45473240";
 
-    return fetch ("https://v6.exchangerate-api.com/v6/" + apiKey + "/pair/EUR/" + currencyCode);
+    return fetch ("https://v6.exchangerate-api.com/v6/" + apiKey + "/pair/" + destinationCountryCurrency +"/" + homeCountryCurrency);
 }).then(function(response){
     if (response.ok) {
         return response.json();
     }else { 
-        return Promise.reject(response);
+        // return Promise.reject(response);
+        return alert("404");
     }
 }).then (function(data) {
     console.log(data.conversion_rate);
