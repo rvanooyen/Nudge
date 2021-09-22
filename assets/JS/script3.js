@@ -258,6 +258,8 @@ var countries = [
 // console.log(countries[0].currency);
 
 
+
+
 // var selectEl = document.createElement('select');
 // document.getElementsByTagName('body')[0].appendChild(selectEl);
 
