@@ -12,92 +12,108 @@
 </head>
 
 <body>
+    <!-- Header navigation bar-->
     <header>
-        <!-- need to make title "sticky"-->
-        <h1 href="Nudge">Nudge</h1>
-        <nav>
-            <div class="pure-menu pure-menu-horizontal">
-                <a href="#" class="pure-menu-heading pure-menu-link">Destination</a>
-                <ul class="pure-menu-list">
+
+        <h1>
+            <a href="/">Nudge</a>
+        </h1>
+        <nav id="menuLink1" class="pure-menu-allow-hover">
+            <ul>
+                <a href="#country">Country</a>
+                <a href="#tours">Tours</a>
+                <a href="#currency">Currency</a>
+          </ul>
+        </nav>
+        <q>Travel makes you a better, happier human. 
+            Our team knows that. That's why we want to share it with you.</q>
+            <h6 >Connor Wilson, Founder of www.pilotplans.com</h6>
+        
+    </header>
+    <!-- jumbo `image` -->
+    <img class="pure-img" src="./assets/images/mark-asthoff-hmJxEgz6CQs-unsplash.jpg" alt="sky" />
+    <Section id="quote">
+        
+        </div>
+
+        <!-- MAIN:1 Destination -->
+        <output>
+            <div class="pure-g">
+                <div class="pure-u-1-4 pure-u-lg-1-8">
+                    <img class="pure-img" src="" alt="city">
+                    <a class="pure-button" href="#">called-ctry1</a>
+                </div>
+
+                <div class="pure-u-1-4 pure-u-lg-1-8">
+                    <img class="pure-img" src="" alt="nature">
+                    <a class="pure-button" href="#">called-ctry2</a>
+                </div>
+                <div class="pure-u-1-4 pure-u-lg-1-8">
+                    <img class="pure-img" src="" alt="people">
+                    <a class="pure-button" href="#">called-ctry3</a>
+                </div>
+                <div class="pure-u-1-4 pure-u-lg-1-8">
+                    <img class="pure-img" src="" alt="earth">
+                    <a class="pure-button" href="#">called-ctry4</a>
+                </div>
+            </div>
+        </output>
+        <!-- MAIN:2 country information boad nav-->
+    <section class="#tours">
+        <fieldset>
+            <legend>Tours</legend>
+        </fieldset><br />
+            <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                <form class="pure-form">
+                    <input type="text" class="pure-input-rounded" placeholder="Type A County Name" />
+                    <button type="submit" placeholder="Type County Name" class="pure-button">Search</button>
+                </form>
+
+                <ul class="pure-menu-children">
                     <li class="pure-menu-item">
-                        <a href="#" class="pure-menu-link">Site Tours</a>
+                        <a href="#" id="country1">called-ctry1-name</a>
                     </li>
                     <li class="pure-menu-item">
-                        <a href="#" class="pure-menu-link">Currency</a>
+                          <a href="#" id="country2">called-ctry2-name</a>
+                   </li>
+                   <li class="pure-menu-item">
+                         <a href="#" id="country3">called-ctry3-name</a>
+                    </li>
+                    <li class="pure-menu-item">
+                         <a href="#" id="country4">called-ctry4-name</a>
                     </li>
                 </ul>
+            </li>
+    </section>
+        <!-- MAIN:2 country information panel-->
+
+        <!--MAIN:3  Currency  -->
+        <form class="pure-form">
+            <fieldset>
+                <legend>Currency</legend>
+            </fieldset><br />
+
+            <input type="text" placeholder="USD" />
+            <button type="convert" class="pure-button pure-button-primary">Convert to</button>
+            <input type="text" placeholder="-called by-" />
+            <div>
+                <P>//*this is an example *// <br />
+                    1.00 US Dollar =
+                    110.25 JP Yen</P>
             </div>
-        </nav>
-    </header>
-<!-- Hero `image` & `P`-->
-    <img class="pure-img" src="" alt="Lake" />
+            </fieldset>
+        </form>
+        <!-- resource info -->
+        <footer>
 
- </div>
-<!-- MAIN:2 City information boad -->
-
-    
-    <div class="pure-g">
-        <div class="pure-u-1-4 pure-u-lg-1-8">
-            <img class="pure-img" src="" alt="city1">
-        </div>
-            
-        <div class="pure-u-1-4 pure-u-lg-1-8">
-            <img class="pure-img" src="" alt="people">
-        </div>
-        <div class="pure-u-1-4 pure-u-lg-1-8">
-            <img class="pure-img" src="" alt="city2">
-        </div>
-        <div class="pure-u-1-4 pure-u-lg-1-8">
-            <img class="pure-img" src="" alt="nature">
-        </div>
-    </div>   
-<!-- MAIN:1 Destination -->
-                 <!-- Bar:1 City Name btn & pull down list-->
-                 <div class="pure-menu pure-menu-horizontal">
-                    <ul class="pure-menu-list">
-                        <li class="pure-menu-item pure-menu-selected">
-                            <a href="#" class="pure-menu-link">Destination</a>
-                        </li>
-                        <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-                            <a href="#" id="menuLink1" class="pure-menu-link">Which city?</a>
-                            <ul class="pure-menu-children">
-                                <li class="pure-menu-item">
-                                    <a href="#" class="pure-menu-link">city1</a>
-                                </li>
-                                <li class="pure-menu-item">
-                                    <a href="#" class="pure-menu-link">city2</a>
-                                </li>
-                                <li class="pure-menu-item">
-                                    <a href="#" class="pure-menu-link">how many more...!?</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-               
-<!-- MAIN:2 City information boad -->
- <!--MAIN:3  Currency  -->
-    <form class="pure-form">
-        <fieldset>
-            <legend>How much in your wallet?</legend>
-        </fieldset><br />
-        <input type="number" placeholder="Amount:" /><br />
-        <input type="text" placeholder="USD" />
-        <button type="convert" class="pure-button pure-button-primary">Convert to</button>
-        <input type="text" placeholder="JPY" />
-        <div>
-            <P>//*this is an example *// <br />
-                1.00 US Dollar =
-                110.25 JP Yen</P>
-        </div>
-        </fieldset>
-    </form>
-<!-- resource info -->
+        </footer>
 
 
 
 
 
-<script src = "./assets/JS/script.js"></script>
+
+        <script src="./assets/JS/script.js"></script>
 </body>
 
 </html>
