@@ -258,11 +258,12 @@ var countries = [
 console.log(countries[0].currency);
 
 
-var selectEl = document.createElement('select');
-document.getElementsByTagName('body')[0].appendChild(selectEl);
+// var selectEl = document.createElement('select');
+// document.getElementsByTagName('body')[0].appendChild(selectEl);
 
 for (var i=0; i< countries.length; i++) {
     var optionEl = document.createElement('option');
+    optionEl.setAttribute('class', 'selected');
 
     if (i == 0) {
         optionEl.setAttribute('disabled', 'disabled');
