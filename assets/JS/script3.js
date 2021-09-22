@@ -255,7 +255,7 @@ var countries = [
     {"name":"Zimbabwe","code":"ZW","currency":"ZWL"}
 ];
 
-console.log(countries[0].currency);
+// console.log(countries[0].currency);
 
 
 // var selectEl = document.createElement('select');
@@ -274,4 +274,44 @@ for (var i=0; i< countries.length; i++) {
     optionEl.appendChild(optionElText);
 
     document.getElementsByTagName('select')[0].appendChild(optionEl);
-}
+};
+
+
+var getCountryCode;
+
+fetch("https://api.teleport.org/api/countries/iso_alpha2:US/").then(function(response){
+    if (response.ok) {
+        return response.json();
+    } else {
+        return Promise.reject(response);
+    }
+}).then(function (data) {
+    // store the country code to a variable
+    getCountryCode = data;
+
+    var currencyCode = data.currency_code;
+
+    console.log(currencyCode);
+
+    // fetch the exchange code API
+    var apiKey = "6d29c9cf5737b60b45473240";
+
+    return fetch ("https://v6.exchangerate-api.com/v6/" + apiKey + "/pair/EUR/" + currencyCode);
+}).then(function(response){
+    if (response.ok) {
+        return response.json();
+    }else { 
+        return Promise.reject(response);
+    }
+}).then (function(data) {
+    console.log(data.conversion_rate);
+}).catch(function (error) {
+    console.warn(error);
+});
+
+
+
+ 
+
+
+
