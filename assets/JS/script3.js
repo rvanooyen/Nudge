@@ -314,8 +314,8 @@ var formSubmitHandler = function(event) {
      // storeCity(citySearch);
   
       // clear old content
-     // repoContainerEl.textContent = "";
-     // nameInputEl.value = "";
+    //repoContainerEl.textContent = "";
+    //nameInputEl.value = "";
      homeMsg.innerHTML ="";
     } else {
       homeMsg.innerHTML = "Please select a home country.";
@@ -324,15 +324,22 @@ var formSubmitHandler = function(event) {
     if (destSearch) {
         getDestCountry(destSearch);
         console.log(destSearch);
+        
         destMsg.innerHTML ="";
     } else {
       destMsg.innerHTML = "Please select a destination country.";
      
     }
+    if(homeSearch && destSearch){
+        displayAmountEntry();
+        
+       
+    }
+    
    
   };
-
-
+ 
+  
 //Create and append home country select list
 var homeCountryList = document.createElement("select");
 homeCountryList.id = "homecountry";
@@ -460,32 +467,40 @@ var displayDestCountry = function(destCountryData) {
     destInfo.innerHTML= "Destination Country: <br>"+destCountryData.name +", Currency Code :" +destCountryData.currency_code;
     
      destCurrency = destCountryData.currency_code;
+     
+     
+    }
 
-     var amountEntry = document.createElement("INPUT");
+    function displayAmountEntry(){
+       
+        var label = document.createElement("Label");
+        label.innerHTML="Please enter an amount:";
+        currencyEntry.appendChild(label);
+        var amountEntry = document.createElement("INPUT");
      amountEntry .setAttribute("type", "number");
      amountEntry .id = 'currency-amount';
      currencyEntry.appendChild(amountEntry );
-let saveBtn= document.createElement('div');
-saveBtn.className ='saveBtn';
-var btn = document.createElement("BUTTON");
-//btn.id= 'btn'+hourDisplay;
-btn.setAttribute("onclick", "convertRate()");
- btn.innerHTML = "Convert to " + destCurrency;
-btn.setAttribute("type", "submit");
-saveBtn.appendChild(btn);
-currencyEntry.appendChild(saveBtn);
+    let saveBtn= document.createElement('div');
+    saveBtn.className ='saveBtn';
+    var btn = document.createElement("BUTTON");
+    btn.setAttribute("onclick", "convertRate()");
+    btn.innerHTML = "Convert";
+    btn.setAttribute("type", "submit");
+    saveBtn.appendChild(btn);
+    currencyEntry.appendChild(saveBtn);
     }
 function convertRate(){
+    
     exchangeRate(homeCurrency, destCurrency);
     console.log(homeCurrency);
     console.log(destCurrency);
-    //var amountCurrency = parseInt(document.getElementById("currency-amount").value);
+   
 
 }
     var clearCurrency = function() {
         var currencyContainerEl = document.getElementById("currency-container");
         currencyContainerEl.innerHTML = "";
-        
+                
     }
     
     var exchangeRate = function(baseCurrency, currencyCode) {
@@ -566,7 +581,7 @@ fetch("https://api.teleport.org/api/countries/iso_alpha2:" + homeCountryCode +"/
 // add event listeners to forms
 userFormEl.addEventListener("submit", formSubmitHandler);
 
- 
+//displayAmountEntry();
 
 
 
