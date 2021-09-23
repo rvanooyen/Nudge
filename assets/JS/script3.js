@@ -10,8 +10,9 @@ var destInfo = document.getElementById("dest-data");
 var homeCurrency;
 var destCurrency;
 var convertRate;
-//var amountCurrency = document.getElementById("currency-amount");
+var amountCurrency = document.getElementById("currency-amount");
 var currencyContainerEl = document.getElementById("currency-container");
+var currencyEntry = document.getElementById("entry-container");
 var countries = [
     {"name":"Afghanistan","code":"AF","currency":"AFN"},
     {"name":"Aland Islands","code":"AX","currency":"EUR"},
@@ -462,8 +463,8 @@ var displayDestCountry = function(destCountryData) {
 
      var amountEntry = document.createElement("INPUT");
      amountEntry .setAttribute("type", "number");
-     amountEntry .id = 'currency-container';
-currencyContainerEl.appendChild(amountEntry );
+     amountEntry .id = 'currency-amount';
+     currencyEntry.appendChild(amountEntry );
 let saveBtn= document.createElement('div');
 saveBtn.className ='saveBtn';
 var btn = document.createElement("BUTTON");
@@ -472,7 +473,7 @@ btn.setAttribute("onclick", "convertRate()");
  btn.innerHTML = "Convert to " + destCurrency;
 btn.setAttribute("type", "submit");
 saveBtn.appendChild(btn);
-currencyContainerEl.appendChild(saveBtn);
+currencyEntry.appendChild(saveBtn);
     }
 function convertRate(){
     exchangeRate(homeCurrency, destCurrency);
@@ -484,6 +485,7 @@ function convertRate(){
     var clearCurrency = function() {
         var currencyContainerEl = document.getElementById("currency-container");
         currencyContainerEl.innerHTML = "";
+        
     }
     
     var exchangeRate = function(baseCurrency, currencyCode) {
@@ -500,7 +502,7 @@ function convertRate(){
             .then(function(response) {
                 clearCurrency();
                 console.log(response);
-               var amountCurrency = document.getElementById("currency-amount").value;
+                amountCurrency = document.getElementById("currency-amount").value;
                 console.log(amountCurrency);
                 var amount = amountCurrency * response.conversion_rate;
                 console.log(amount);
@@ -516,8 +518,10 @@ function convertRate(){
                 pElTotalAmt.textContent = "You have " + amount + currencyCode;     
                 
                 // appends current currency to HTML
-                $("#currency-container").append(pElConversionRate);
-                $("#currency-container").append(pElTotalAmt);                       
+                currencyContainerEl.append(pElConversionRate);
+                currencyContainerEl.append(pElTotalAmt);
+               // $("#currency-container").append(pElConversionRate);
+               // $("#currency-container").append(pElTotalAmt);                       
             });
     };
 
