@@ -1,5 +1,10 @@
 // All countries
 // length 252
+var homeCountry = document.getElementById("select-country");
+var destCountry = document.getElementById("destination-country");
+var homeMsg = document.getElementById("home-msg");
+var destMsg = document.getElementById("dest-msg");
+var userFormEl = document.querySelector("#user-form");
 var countries = [
     {"name":"Afghanistan","code":"AF","currency":"AFN"},
     {"name":"Aland Islands","code":"AX","currency":"EUR"},
@@ -263,7 +268,7 @@ var countries = [
 // var selectEl = document.createElement('select');
 // document.getElementsByTagName('body')[0].appendChild(selectEl);
 
-for (var i=0; i< countries.length; i++) {
+/* for (var i=0; i< countries.length; i++) {
     var optionEl = document.createElement('option');
     optionEl.setAttribute('class', 'selected');
 
@@ -274,10 +279,79 @@ for (var i=0; i< countries.length; i++) {
 
     var optionElText = document.createTextNode(countries[i].name);
     optionEl.appendChild(optionElText);
+    //optionElText.
+    
+    //optionEl.append(countries[i].name).val();
 
     document.getElementsByTagName('select')[0].appendChild(optionEl);
-};
+    
+}; */
 
+var formSubmitHandler = function(event) {
+    // prevent page from refreshing
+    event.preventDefault();
+  
+    // get value from input element
+    var homeSearch =  homeCountryList.options[homeCountryList.selectedIndex].value;
+    var destSearch =  destCountryList.options[destCountryList.selectedIndex].value;
+  
+    if (homeSearch || destSearch) {
+       
+        console.log(homeSearch);
+        console.log(destSearch);
+     // getCurrentWeather(citySearch);
+     // getForecastWeather(citySearch);
+     // storeCity(citySearch);
+  
+      // clear old content
+     // repoContainerEl.textContent = "";
+     // nameInputEl.value = "";
+     
+    } else {
+      
+      alert("Please select a City");
+    }
+  };
+
+
+//Create and append home country select list
+var homeCountryList = document.createElement("select");
+homeCountryList.id = "homecountry";
+homeCountry.appendChild(homeCountryList);
+var selectHome = document.createElement("option");
+selectHome.value = "";
+selectHome.text = "Please select";
+homeCountryList.appendChild(selectHome);
+
+
+//Create and append the options for home country selection
+for (var i = 0; i < countries.length; i++) {
+    var option = document.createElement("option");
+    option.value = countries[i].code;
+    option.text = countries[i].name;
+    homeCountryList.appendChild(option);
+   
+}
+
+//Create and append destination country select list
+var destCountryList = document.createElement("select");
+destCountryList.id = "destcountry";
+destCountry.appendChild(destCountryList);
+var selectDestination = document.createElement("option");
+selectDestination.value = "";
+selectDestination.text = "Please select";
+destCountryList.appendChild(selectDestination);
+
+
+
+//Create and append the options for home country selection
+for (var i = 0; i < countries.length; i++) {
+    var option = document.createElement("option");
+    option.value = countries[i].code;
+    option.text = countries[i].name;
+    destCountryList.appendChild(option);
+   
+}
 
 // user selects a home country and a destination country
 
@@ -325,6 +399,7 @@ fetch("https://api.teleport.org/api/countries/iso_alpha2:" + homeCountryCode +"/
     var homeCountryCurrency = data.currency_code;
 
     console.log(homeCountryCurrency);
+    console.log(data);
 
     // fetch the exchange code API
     var apiKey = "6d29c9cf5737b60b45473240";
@@ -339,11 +414,13 @@ fetch("https://api.teleport.org/api/countries/iso_alpha2:" + homeCountryCode +"/
     }
 }).then (function(data) {
     console.log(data.conversion_rate);
+    console.log(data);
 }).catch(function (error) {
     console.warn(error);
 });
 
-
+// add event listeners to forms
+userFormEl.addEventListener("submit", formSubmitHandler);
 
  
 
