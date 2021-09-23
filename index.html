@@ -80,23 +80,17 @@
         <fieldset>
             <legend>How much in your wallet?</legend>
         </fieldset><br />
-        <input type="number" placeholder="Amount:" /><br />
-        <input type="text" placeholder="USD" />
-        <button type="convert" class="pure-button pure-button-primary">Convert to</button>
-        <input type="text" placeholder="JPY" />
-        <div>
-            <P>//*this is an example *// <br />
-                1.00 US Dollar =
-                110.25 JP Yen</P>
+        <input id = "currency-amount" type="number" placeholder="Amount:" /><br />
+        <input id = "currency-base" type="text" placeholder="USD" />
+        <button id = "currency-btn" type="convert" class="pure-button pure-button-primary">Convert to</button>
+        <input id = "currency-convert" type="text" placeholder="JPY" />
+        <div id = "currency-container">
+            
         </div>
         </fieldset>
     </form>
 <!-- resource info -->
-
-
-
-
-
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src = "./assets/JS/script.js"></script>
 </body>
 
