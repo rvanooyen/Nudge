@@ -1,3 +1,5 @@
+// var url = "https://v6.exchangerate-api.com/v6/" + apiKey + "/latest/" + currencyCode;
+
 // // var url = "https://v6.exchangerate-api.com/v6/" + apiKey + "/latest/" + currencyCode;
 
 // var clearCurrency = function() {
@@ -778,4 +780,3 @@ var loadBucketList = function() {
         countrylistEl.append(countryEl);
     }
   };
-

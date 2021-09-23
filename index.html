@@ -12,51 +12,86 @@
 </head>
 
 <body>
+    <header>
+        <!-- need to make title "sticky"-->
+        <h1 href="Nudge">Nudge</h1>
+        <nav>
+            <div class="pure-menu pure-menu-horizontal">
+                <a href="#" class="pure-menu-heading pure-menu-link">Destination</a>
+                <ul class="pure-menu-list">
+                    <li class="pure-menu-item">
+                        <a href="#" class="pure-menu-link">Site Tours</a>
+                    </li>
+                    <li class="pure-menu-item">
+                        <a href="#" class="pure-menu-link">Currency</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+<!-- Hero `image` & `P`-->
+    <img class="pure-img" src="" alt="Lake" />
 
-  <main class="flex-row justify-space-between">
-    <div class="col-12 col-md-4">
-        <div class="card">
-            <h3 class="card-header text-uppercase">Search By City</h3>
-            <form id="city-form" class="card-body">
-              <label class="form-label" for="username">Enter City Name</label>
-              <input name="cityname" id="city-name" type="text" autofocus="true" class="form-input" />
-              <button type="submit" class="btn">Get City Info</button>
-            </form>
-          </div>
+ </div>
+<!-- MAIN:2 City information boad -->
 
-          <div class="col-12 col-md-8">
-            <h2 class="subtitle">Showing City Info for: <span id="city-search-term"></span></h2>
-            <div id="city-container" class="list-group"></div>
-            <div id="fidget-container" class="list-group"> div for the fidget</div>
-          </div>
-        
+    
+    <div class="pure-g">
+        <div class="pure-u-1-4 pure-u-lg-1-8">
+            <img class="pure-img" src="" alt="city1">
+        </div>
+            
+        <div class="pure-u-1-4 pure-u-lg-1-8">
+            <img class="pure-img" src="" alt="people">
+        </div>
+        <div class="pure-u-1-4 pure-u-lg-1-8">
+            <img class="pure-img" src="" alt="city2">
+        </div>
+        <div class="pure-u-1-4 pure-u-lg-1-8">
+            <img class="pure-img" src="" alt="nature">
+        </div>
+    </div>   
+<!-- MAIN:1 Destination -->
+                 <!-- Bar:1 City Name btn & pull down list-->
+                 <div class="pure-menu pure-menu-horizontal">
+                    <ul class="pure-menu-list">
+                        <li class="pure-menu-item pure-menu-selected">
+                            <a href="#" class="pure-menu-link">Destination</a>
+                        </li>
+                        <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                            <a href="#" id="menuLink1" class="pure-menu-link">Which city?</a>
+                            <ul class="pure-menu-children">
+                                <li class="pure-menu-item">
+                                    <a href="#" class="pure-menu-link">city1</a>
+                                </li>
+                                <li class="pure-menu-item">
+                                    <a href="#" class="pure-menu-link">city2</a>
+                                </li>
+                                <li class="pure-menu-item">
+                                    <a href="#" class="pure-menu-link">how many more...!?</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+               
+<!-- MAIN:2 City information boad -->
+ <!--MAIN:3  Currency  -->
+    <form class="pure-form">
+        <fieldset>
+            <legend>How much in your wallet?</legend>
+        </fieldset><br />
+        <input id = "currency-amount" type="number" placeholder="Amount:" /><br />
+        <input id = "currency-base" type="text" placeholder="USD" />
+        <button id = "currency-btn" type="convert" class="pure-button pure-button-primary">Convert to</button>
+        <input id = "currency-convert" type="text" placeholder="JPY" />
+        <div id = "currency-container">
             
         </div>
-    </div>
-
-    <div class="col-12 col-md-8"></div>
-
-</main>
-
-
- <!-- cost of living -->
-
-    <!-- <a class="teleport-widget-link" href="https://teleport.org/cities/bangkok/">Cost of living - Bangkok</a>
-    
-    <script async class="teleport-widget-script" 
-    data-url="https://teleport.org/cities/bangkok/widget/costs/?currency=USD" 
-    data-max-width="770" data-height="500" 
-    src="https://teleport.org/assets/firefly/widget-snippet.min.js"></script> 
-
-    life quality-->
-    <!-- <a class="teleport-widget-link" href="https://teleport.org/cities/bangkok/">Life quality score - Bangkok</a>
-    <script async class="teleport-widget-script" 
-    data-url="https://teleport.org/cities/bangkok/widget/scores/?currency=USD" 
-    data-max-width="420" data-height="968" 
-    src="https://teleport.org/assets/firefly/widget-snippet.min.js"></script>  -->
-   
+        </fieldset>
+    </form>
+<!-- resource info -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src = "assets/JS/script.js"></script>
+<script src = "./assets/JS/script.js"></script>
 </body>
 
 </html>

@@ -5,6 +5,13 @@ var destCountry = document.getElementById("destination-country");
 var homeMsg = document.getElementById("home-msg");
 var destMsg = document.getElementById("dest-msg");
 var userFormEl = document.querySelector("#user-form");
+var homeInfo = document.getElementById("home-data");
+var destInfo = document.getElementById("dest-data");
+var homeCurrency;
+var destCurrency;
+var convertRate;
+//var amountCurrency = document.getElementById("currency-amount");
+var currencyContainerEl = document.getElementById("currency-container");
 var countries = [
     {"name":"Afghanistan","code":"AF","currency":"AFN"},
     {"name":"Aland Islands","code":"AX","currency":"EUR"},
@@ -294,11 +301,13 @@ var formSubmitHandler = function(event) {
     // get value from input element
     var homeSearch =  homeCountryList.options[homeCountryList.selectedIndex].value;
     var destSearch =  destCountryList.options[destCountryList.selectedIndex].value;
+     // get value from input element
+ 
   
     if (homeSearch) {
        
         console.log(homeSearch);
-       
+        getHomeCountry(homeSearch);
      // getCurrentWeather(citySearch);
      // getForecastWeather(citySearch);
      // storeCity(citySearch);
@@ -308,17 +317,18 @@ var formSubmitHandler = function(event) {
      // nameInputEl.value = "";
      homeMsg.innerHTML ="";
     } else {
-      homeMsg.innerHTML = "Please select a home city.";
+      homeMsg.innerHTML = "Please select a home country.";
      // alert("Please select a City");
     }
     if (destSearch) {
-       
+        getDestCountry(destSearch);
         console.log(destSearch);
         destMsg.innerHTML ="";
     } else {
-      destMsg.innerHTML = "Please select a destination city.";
-     // alert("Please select a City");
+      destMsg.innerHTML = "Please select a destination country.";
+     
     }
+   
   };
 
 
@@ -388,8 +398,130 @@ console.log(destinationCountryCurrency);
 
 
 // do the API call
+var getHomeCountry = function(homeCountryCode) {
 
-var teleportCountry;
+
+    var apiCountryUrl =  "https://api.teleport.org/api/countries/iso_alpha2:" + homeCountryCode +"/";
+  
+    // make a get request to url
+    fetch(apiCountryUrl)
+      .then(function(response) {
+        // request was successful
+        if (response.ok) {
+          console.log(response);
+          response.json().then(function(homeCountryData) {
+            console.log(homeCountryData);
+           displayHomeCountry(homeCountryData);
+          });
+        } else {
+          alert("Error: " + response.statusText);
+        }
+      })
+      .catch(function(error) {
+        alert("Unable to connect");
+      });
+  };
+
+  var getDestCountry = function(destCountryCode) {
+
+
+    var apiCountryUrl =  "https://api.teleport.org/api/countries/iso_alpha2:" + destCountryCode +"/";
+  
+    // make a get request to url
+    fetch(apiCountryUrl)
+      .then(function(response) {
+        // request was successful
+        if (response.ok) {
+          console.log(response);
+          response.json().then(function(destCountryData) {
+            console.log(destCountryData);
+            displayDestCountry(destCountryData);
+          });
+        } else {
+          alert("Error: " + response.statusText);
+        }
+      })
+      .catch(function(error) {
+        alert("Unable to connect");
+      });
+  };
+
+// Display home country data
+var displayHomeCountry = function(homeCountryData) {
+homeInfo.innerHTML= "Home Country: <br>"+homeCountryData.name +", Currency Code :" + homeCountryData.currency_code;
+homeCurrency = homeCountryData.currency_code;
+
+
+}
+
+// Display destination country data
+var displayDestCountry = function(destCountryData) {
+    destInfo.innerHTML= "Destination Country: <br>"+destCountryData.name +", Currency Code :" +destCountryData.currency_code;
+    
+     destCurrency = destCountryData.currency_code;
+
+     var amountEntry = document.createElement("INPUT");
+     amountEntry .setAttribute("type", "number");
+     amountEntry .id = 'currency-container';
+currencyContainerEl.appendChild(amountEntry );
+let saveBtn= document.createElement('div');
+saveBtn.className ='saveBtn';
+var btn = document.createElement("BUTTON");
+//btn.id= 'btn'+hourDisplay;
+btn.setAttribute("onclick", "convertRate()");
+ btn.innerHTML = "Convert to " + destCurrency;
+btn.setAttribute("type", "submit");
+saveBtn.appendChild(btn);
+currencyContainerEl.appendChild(saveBtn);
+    }
+function convertRate(){
+    exchangeRate(homeCurrency, destCurrency);
+    console.log(homeCurrency);
+    console.log(destCurrency);
+    //var amountCurrency = parseInt(document.getElementById("currency-amount").value);
+
+}
+    var clearCurrency = function() {
+        var currencyContainerEl = document.getElementById("currency-container");
+        currencyContainerEl.innerHTML = "";
+    }
+    
+    var exchangeRate = function(baseCurrency, currencyCode) {
+        var apiKey = "6d29c9cf5737b60b45473240";
+        var url = "https://v6.exchangerate-api.com/v6/" + apiKey + "/pair/" + baseCurrency + "/" + currencyCode;
+        fetch(url)
+            .then(function(response) {
+                if (response.ok) {                
+                    return response.json();
+                } else {
+                    alert("Error: " + response.statusText);
+                }                       
+            })
+            .then(function(response) {
+                clearCurrency();
+                console.log(response);
+               var amountCurrency = document.getElementById("currency-amount").value;
+                console.log(amountCurrency);
+                var amount = amountCurrency * response.conversion_rate;
+                console.log(amount);
+    
+                // creates currency elements
+                var pElConversionRate = document.createElement("p");
+                var pElTotalAmt = document.createElement("P");                                         
+    
+                // sets currency properties
+                pElConversionRate.setAttribute("id", "conversion-rate");
+                pElConversionRate.textContent = "one " + baseCurrency + " = " + response.conversion_rate + " " + currencyCode;
+                pElTotalAmt.setAttribute("id", "total-amount");
+                pElTotalAmt.textContent = "You have " + amount + currencyCode;     
+                
+                // appends current currency to HTML
+                $("#currency-container").append(pElConversionRate);
+                $("#currency-container").append(pElTotalAmt);                       
+            });
+    };
+
+/* var teleportCountry;
 
 fetch("https://api.teleport.org/api/countries/iso_alpha2:" + homeCountryCode +"/").then(function(response){
     if (response.ok) {
@@ -426,7 +558,7 @@ fetch("https://api.teleport.org/api/countries/iso_alpha2:" + homeCountryCode +"/
 }).catch(function (error) {
     console.warn(error);
 });
-
+ */
 // add event listeners to forms
 userFormEl.addEventListener("submit", formSubmitHandler);
 
