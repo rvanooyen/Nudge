@@ -52,9 +52,38 @@ header h1 {
     width: 336px;
 
 }
+.purpose {
+    margin: 0px;
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.purpose p {
+    margin: 0px;
+    padding: 16px 0 0 0;
+    font-size: 38px;
+    background-color: rgb(180, 204, 235);
+    height: 140px;
+    color:rgb(64, 65, 39);
+    
+}
 
 @media screen and (max-width: 380px) {
     .jumbo h2{
       font-size: 30px;
+    }
+  }
+
+
+  @media screen and (max-width: 872px) {
+    .purpose p{
+      font-size: 28px;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .purpose p{
+      font-size: 22px;
     }
   }
