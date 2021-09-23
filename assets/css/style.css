@@ -1,0 +1,89 @@
+body {
+    padding: 0px;
+    background-color: rgb(236, 240, 248);
+}
+
+.red {
+    color:crimson;
+    font-weight: bold;
+    padding: 10px 0px 10px 0px;
+}
+.contain {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0 14px 0 16px;
+    background-color: rgb(236, 240, 248);
+    
+}
+
+header {
+    width: 100%;
+    background-image: url("../images/globe.png");
+    background-position: 3px 6px;
+    background-repeat: no-repeat;
+    background-color: #5785b5;
+    color:azure;
+    height: 90px; 
+}
+.jumbo {
+    height: 280px;
+    background-image: url("../images/travel.jpg");
+
+}
+
+.jumbo h2 {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    font-size: 60px;
+    color:azure;
+    padding-top: 60px;
+    text-shadow: 2px 2px #19181b;
+
+}
+header h1 {
+   padding: 30px 0px 0px 60px;
+   margin: 0px;
+   font-family: 'Noto Sans', sans-serif;
+   text-shadow: 2px 2px #070707;
+
+}
+.dropdown {
+    width: 336px;
+
+}
+.purpose {
+    margin: 0px;
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.purpose p {
+    margin: 0px;
+    padding: 16px 0 0 0;
+    font-size: 38px;
+    background-color: rgb(180, 204, 235);
+    height: 140px;
+    color:rgb(64, 65, 39);
+    
+}
+
+@media screen and (max-width: 380px) {
+    .jumbo h2{
+      font-size: 30px;
+    }
+  }
+
+
+  @media screen and (max-width: 872px) {
+    .purpose p{
+      font-size: 28px;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .purpose p{
+      font-size: 22px;
+    }
+  }
