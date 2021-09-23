@@ -295,10 +295,10 @@ var formSubmitHandler = function(event) {
     var homeSearch =  homeCountryList.options[homeCountryList.selectedIndex].value;
     var destSearch =  destCountryList.options[destCountryList.selectedIndex].value;
   
-    if (homeSearch || destSearch) {
+    if (homeSearch) {
        
         console.log(homeSearch);
-        console.log(destSearch);
+       
      // getCurrentWeather(citySearch);
      // getForecastWeather(citySearch);
      // storeCity(citySearch);
@@ -306,10 +306,18 @@ var formSubmitHandler = function(event) {
       // clear old content
      // repoContainerEl.textContent = "";
      // nameInputEl.value = "";
-     
+     homeMsg.innerHTML ="";
     } else {
-      
-      alert("Please select a City");
+      homeMsg.innerHTML = "Please select a home city.";
+     // alert("Please select a City");
+    }
+    if (destSearch) {
+       
+        console.log(destSearch);
+        destMsg.innerHTML ="";
+    } else {
+      destMsg.innerHTML = "Please select a destination city.";
+     // alert("Please select a City");
     }
   };
 
