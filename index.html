@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -7,91 +7,58 @@
     <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css"
         integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Nudge</title>
 </head>
 
 <body>
     <header>
-        <!-- need to make title "sticky"-->
-        <h1 href="Nudge">Nudge</h1>
-        <nav>
-            <div class="pure-menu pure-menu-horizontal">
-                <a href="#" class="pure-menu-heading pure-menu-link">Destination</a>
-                <ul class="pure-menu-list">
-                    <li class="pure-menu-item">
-                        <a href="#" class="pure-menu-link">Site Tours</a>
-                    </li>
-                    <li class="pure-menu-item">
-                        <a href="#" class="pure-menu-link">Currency</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <h1>Nudge</h1>
     </header>
-<!-- Hero `image` & `P`-->
-    <img class="pure-img" src="" alt="Lake" />
 
- </div>
-<!-- MAIN:2 City information boad -->
-
+    <div class="jumbo">
+        <h2>Why Not Travel The World?</h2>
+    </div>
     
-    <div class="pure-g">
-        <div class="pure-u-1-4 pure-u-lg-1-8">
-            <img class="pure-img" src="" alt="city1">
+        <div class="purpose">
+            <p style="text-align: center; size: 36px;">If you fear traveling, we are here  to help make your destination dreams come true. Learn about quality of life, cost of living and currency exchange for free!</p>
         </div>
-            
-        <div class="pure-u-1-4 pure-u-lg-1-8">
-            <img class="pure-img" src="" alt="people">
+
+        <div class="contain">
+        <form id="user-form">
+            <div>
+                <p>Select your home country:</p>
+            </div>
+            <div id="select-country"></div>
+            <div id="home-msg"></div>
+            <div>
+                <p> Select your destination country:</p>
+            </div>
+            <div id="destination-country"></div>
+            <div id="dest-msg"></div>
+
+            <button type="submit" class="btn" style="margin-top: 16px;">Search</button>
+            <div id="home-data"></div>
+            <div id="dest-data"></div>
+
+            <div id="currency-container">
+
+            </div>
+
+        </form>
+        <div id="entry-container">
+
         </div>
-        <div class="pure-u-1-4 pure-u-lg-1-8">
-            <img class="pure-img" src="" alt="city2">
-        </div>
-        <div class="pure-u-1-4 pure-u-lg-1-8">
-            <img class="pure-img" src="" alt="nature">
-        </div>
-    </div>   
-<!-- MAIN:1 Destination -->
-                 <!-- Bar:1 City Name btn & pull down list-->
-                 <div class="pure-menu pure-menu-horizontal">
-                    <ul class="pure-menu-list">
-                        <li class="pure-menu-item pure-menu-selected">
-                            <a href="#" class="pure-menu-link">Destination</a>
-                        </li>
-                        <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-                            <a href="#" id="menuLink1" class="pure-menu-link">Which city?</a>
-                            <ul class="pure-menu-children">
-                                <li class="pure-menu-item">
-                                    <a href="#" class="pure-menu-link">city1</a>
-                                </li>
-                                <li class="pure-menu-item">
-                                    <a href="#" class="pure-menu-link">city2</a>
-                                </li>
-                                <li class="pure-menu-item">
-                                    <a href="#" class="pure-menu-link">how many more...!?</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-               
-<!-- MAIN:2 City information boad -->
- <!--MAIN:3  Currency  -->
-    <form class="pure-form">
-        <fieldset>
-            <legend>How much in your wallet?</legend>
-        </fieldset><br />
-        <input id = "currency-amount" type="number" placeholder="Amount:" /><br />
-        <input id = "currency-base" type="text" placeholder="USD" />
-        <button id = "currency-btn" type="convert" class="pure-button pure-button-primary">Convert to</button>
-        <input id = "currency-convert" type="text" placeholder="JPY" />
-        <div id = "currency-container">
-            
-        </div>
-        </fieldset>
-    </form>
-<!-- resource info -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src = "./assets/JS/script.js"></script>
+
+
+
+    </div>
+    <script src="./assets/JS/script3.js"></script>
+
 </body>
 
 </html>
