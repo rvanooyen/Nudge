@@ -319,6 +319,7 @@ var formSubmitHandler = function(event) {
      homeMsg.innerHTML ="";
     } else {
       homeMsg.innerHTML = "Please select a home country.";
+      homeMsg.className = "red";
      // alert("Please select a City");
     }
     if (destSearch) {
@@ -328,6 +329,7 @@ var formSubmitHandler = function(event) {
         destMsg.innerHTML ="";
     } else {
       destMsg.innerHTML = "Please select a destination country.";
+      destMsg.className = "red";
      
     }
     if(homeSearch && destSearch){
@@ -343,11 +345,13 @@ var formSubmitHandler = function(event) {
 //Create and append home country select list
 var homeCountryList = document.createElement("select");
 homeCountryList.id = "homecountry";
+homeCountryList.className = "dropdown";
 homeCountry.appendChild(homeCountryList);
 var selectHome = document.createElement("option");
 selectHome.value = "";
 selectHome.text = "Please select";
 homeCountryList.appendChild(selectHome);
+homeCountry.appendChild(homeCountryList);
 
 
 //Create and append the options for home country selection
@@ -362,11 +366,13 @@ for (var i = 0; i < countries.length; i++) {
 //Create and append destination country select list
 var destCountryList = document.createElement("select");
 destCountryList.id = "destcountry";
+destCountryList.className="dropdown";
 destCountry.appendChild(destCountryList);
 var selectDestination = document.createElement("option");
 selectDestination.value = "";
 selectDestination.text = "Please select";
 destCountryList.appendChild(selectDestination);
+destCountry.appendChild(destCountryList);
 
 
 
@@ -379,29 +385,9 @@ for (var i = 0; i < countries.length; i++) {
    
 }
 
-// user selects a home country and a destination country
-
-var homeCountry = [{"name":"United States","code":"US","currency":"USD"}];
-
-var destinationCountry = [{"name":"Cambodia","code":"KH","currency":"KHR"}];
 
 
 
-
-// find this home country's country code to do the API call from teleport
-
-var homeCountryCode = homeCountry[0].code;
-
-console.log(homeCountryCode);
-
-
-
-
-// find the destination country's currency
-
-var destinationCountryCurrency = destinationCountry[0].currency;
-
-console.log(destinationCountryCurrency);
 
 
 
