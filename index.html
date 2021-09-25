@@ -41,19 +41,26 @@
             </div>
             <div id="destination-country"></div>
             <div id="dest-msg"></div>
-            <button type="submit" class="pure-button rounded">Search</button>
+            <button type="submit" id="select-btn" class="pure-button rounded">Search</button>
+            <div id="select-btn" class="modal">
+                <!-- Modal content -->
+                <div id="modal-content">
+                    <span id="close">&times;</span>
+                    <p>Please select a Country</p>
+                </div>
+            </div>
             <div id="home-data"></div>
             <div id="dest-data"></div>
             <div id="currency-container"></div>
         </form>
-            <div id="entry-container" class="hidden">
-                <label class="amount" > Please enter an amount:</label>
-                <input type ="number" id= "currency-amount">
-                <button type="submit" class="pure-button rounded" onclick="convertRate()">Convert</button>
-            </div>
-            <div id = "saved-country"></div>
+        <div id="entry-container" class="hidden">
+            <label class="amount"> Please enter an amount:</label>
+            <input type="number" id="currency-amount">
+            <button type="submit" class="pure-button rounded" onclick="convertRate()">Convert</button>
+        </div>
+        <div id="saved-country"></div>
     </div>
-    
+
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./assets/JS/script.js"></script>

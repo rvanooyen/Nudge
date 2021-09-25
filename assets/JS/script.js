@@ -271,7 +271,6 @@ var countries = [
 ];
 
 
-
 //checking for local storage
 if (JSON.parse(window.localStorage.getItem('countryList'))) {
   saveCountries = JSON.parse(window.localStorage.getItem('countryList'));    
@@ -281,32 +280,6 @@ else {
 }
 
 displayCountries();
-// console.log(countries[0].currency);
-
-
-
-
-// var selectEl = document.createElement('select');
-// document.getElementsByTagName('body')[0].appendChild(selectEl);
-
-/* for (var i=0; i< countries.length; i++) {
-    var optionEl = document.createElement('option');
-    optionEl.setAttribute('class', 'selected');
-
-    if (i == 0) {
-        optionEl.setAttribute('disabled', 'disabled');
-        optionEl.setAttribute('selected', 'selected');
-    }
-
-    var optionElText = document.createTextNode(countries[i].name);
-    optionEl.appendChild(optionElText);
-    //optionElText.
-    
-    //optionEl.append(countries[i].name).val();
-
-    document.getElementsByTagName('select')[0].appendChild(optionEl);
-    
-}; */
 
 var formSubmitHandler = function (event) {
   // prevent page from refreshing
@@ -322,21 +295,38 @@ var formSubmitHandler = function (event) {
 
 
   if (homeSearch) {
-
     console.log(homeSearch);
     getHomeCountry(homeSearch);
-    // getCurrentWeather(citySearch);
-    // getForecastWeather(citySearch);
-    // storeCity(citySearch);
-
-    // clear old content
-    //repoContainerEl.textContent = "";
-    //nameInputEl.value = "";
-    homeMsg.innerHTML = "";
+   // homeMsg.innerHTML = "";
   } else {
-    homeMsg.innerHTML = "Please select a home country.";
-    homeMsg.className = "red";
-    // alert("Please select a City");
+    //homeMsg.innerHTML = "Please select a home country.";
+   // homeMsg.className = "red";
+   // Get the modal
+var modal = document.getElementById("modal-content");
+
+// Get the button that opens the modal
+var btn = document.getElementsById("select-btn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementById("close");
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+ //alert("test");
+  modal.style.display = "block";
+ 
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+   modal.style.display = "none";
+  }
+}
   }
   if (destSearch) {
     getDestCountry(destSearch);
@@ -351,13 +341,8 @@ var formSubmitHandler = function (event) {
   if (homeSearch && destSearch) {
     storeCountries(homeSearch, destSearch, homeText, destText);
     displayAmountEntry();
-
-
   }
-  
-
 };
-
 
 //Create and append home country select list
 var homeCountryList = document.createElement("select");
@@ -451,42 +436,23 @@ var getDestCountry = function (destCountryCode) {
 
 // Display home country data
 var displayHomeCountry = function (homeCountryData) {
-  homeInfo.innerHTML = "<p>" + homeCountryData.name + ", Currency: " + homeCountryData.currency_code;
+  homeInfo.innerHTML = "<p>" + homeCountryData.name + ", Currency: " + homeCountryData.currency_code + "</p>";
   homeInfo.className ="home-country";
-  homeCurrency = homeCountryData.currency_code; + "</p>";
+  homeCurrency = homeCountryData.currency_code;
 
 
 }
 
 // Display destination country data
 var displayDestCountry = function (destCountryData) {
-  destInfo.innerHTML ="<p>" +  destCountryData.name + ", Currency: " + destCountryData.currency_code;
+  destInfo.innerHTML ="<p>" +  destCountryData.name + ", Currency: " + destCountryData.currency_code + "</p>";
   destInfo.className ="dest-country";
-  destCurrency = destCountryData.currency_code  + "</p>";
+  destCurrency = destCountryData.currency_code;
 
 
 }
 
 function displayAmountEntry() {
-
-  //var label = document.createElement("Label");
-  //label.className = "amount";
-  //label.innerHTML = "Please enter an amount:";
-  //currencyEntry.appendChild(label);
-  //var amountEntry = document.createElement("INPUT");
- // amountEntry.setAttribute("type", "number");
- // amountEntry.id = 'currency-amount';
-  //currencyEntry.appendChild(amountEntry);
-  //let saveBtn = document.createElement('div');
-  //saveBtn.className = 'saveBtn';
-  //var btn = document.createElement("BUTTON");
-
-  //btn.setAttribute("onclick", "convertRate()");
- // btn.innerHTML = "Convert";
-  //btn.setAttribute("type", "submit");
-  //saveBtn.appendChild(btn);
-  //currencyEntry.appendChild(saveBtn);
-  //btn.className= "pure-button rounded";
   currencyEntry.className="";
 }
 function convertRate() {
@@ -528,9 +494,9 @@ var exchangeRate = function(baseCurrency, currencyCode) {
 
       // sets currency properties
       pElConversionRate.setAttribute("id", "conversion-rate");
-      pElConversionRate.textContent = "one " + baseCurrency + " = " + response.conversion_rate + " " + currencyCode;
+      pElConversionRate.textContent = "One " + baseCurrency + " = " + response.conversion_rate + " " + currencyCode;
       pElTotalAmt.setAttribute("id", "total-amount");
-      pElTotalAmt.textContent = "You have " + amount + currencyCode;
+      pElTotalAmt.textContent = "You have " + amount + " " +currencyCode;
 
       // appends current currency to HTML
       currencyContainerEl.append(pElConversionRate);
@@ -539,47 +505,6 @@ var exchangeRate = function(baseCurrency, currencyCode) {
       // $("#currency-container").append(pElTotalAmt);                       
     });
 };
-
-/* var teleportCountry;
-
-fetch("https://api.teleport.org/api/countries/iso_alpha2:" + homeCountryCode +"/").then(function(response){
-    if (response.ok) {
-        return response.json();
-    } else {
-        // return Promise.reject(response);
-        return alert("404")
-    }
-}).then(function (data) {
-    // store the country code to a variable
-    teleportCountry = data;
-
-    // convert the homecountry code to currency code
-
-    var homeCountryCurrency = data.currency_code;
-
-    console.log(homeCountryCurrency);
-    console.log(data);
-
-    // fetch the exchange code API
-    var apiKey = "6d29c9cf5737b60b45473240";
-
-    return fetch ("https://v6.exchangerate-api.com/v6/" + apiKey + "/pair/" + destinationCountryCurrency +"/" + homeCountryCurrency);
-}).then(function(response){
-    if (response.ok) {
-        return response.json();
-    }else { 
-        // return Promise.reject(response);
-        return alert("404");
-    }
-}).then (function(data) {
-    console.log(data.conversion_rate);
-    console.log(data);
-}).catch(function (error) {
-    console.warn(error);
-});
- */
-
-
 
 
 // function to store city searches
