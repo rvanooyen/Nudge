@@ -23,13 +23,14 @@
     <div class="jumbo">
         <h2>Why Not Travel The World?</h2>
     </div>
-    
-        <div class="purpose">
-            <p style="text-align: center; size: 36px;">If you fear traveling, we are here  to help make your destination dreams come true. Learn about quality of life, cost of living and currency exchange for free!</p>
-        </div>
 
-        <div class="contain">
-        <form id="user-form">
+    <div class="purpose">
+        <p>If you fear traveling, we are here to help make your destination dreams come true. Learn about quality of
+            life, cost of living and currency exchange for free!</p>
+    </div>
+
+    <div class="contain">
+        <form id="user-form" class="pure-form">
             <div>
                 <p>Select your home country:</p>
             </div>
@@ -40,24 +41,25 @@
             </div>
             <div id="destination-country"></div>
             <div id="dest-msg"></div>
-
-            <button type="submit" class="btn" style="margin-top: 16px;">Search</button>
+            <button type="submit" class="pure-button rounded">Search</button>
             <div id="home-data"></div>
             <div id="dest-data"></div>
-
-            <div id="currency-container">
-
-            </div>
-
+            <div id="currency-container"></div>
         </form>
-        <div id="entry-container">
-
-        </div>
+            <div id="entry-container" class="hidden">
+                <label class="amount" > Please enter an amount:</label>
+                <input type ="number" id= "currency-amount">
+                <button type="submit" class="pure-button rounded" onclick="convertRate()">Convert</button>
+            </div>
+            <div id = "saved-country"></div>
+    </div>
 
 
 
     </div>
-    <script src="./assets/JS/script3.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./assets/JS/script.js"></script>
+
 
 </body>
 

@@ -8,10 +8,24 @@ body {
     font-weight: bold;
     padding: 10px 0px 10px 0px;
 }
+
+.hidden {
+    display: none;
+}
+
+.rounded {
+  margin-top: 16px;
+  color: white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: rgb(66, 184, 221);
+
+}
 .contain {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0 14px 0 16px;
     background-color: rgb(236, 240, 248);
+    margin-bottom: 200px;
     
 }
 
@@ -30,14 +44,18 @@ header {
 
 }
 
+.jumbo p {
+  text-align: center; 
+  size: 36px;
+}
+
 .jumbo h2 {
     font-family: 'Open Sans', sans-serif;
     margin: 0px;
-    padding: 0px;
+    padding: 60px 20px 0px 20px;
     text-align: center;
     font-size: 60px;
     color:azure;
-    padding-top: 60px;
     text-shadow: 2px 2px #19181b;
 
 }
@@ -49,19 +67,17 @@ header h1 {
 
 }
 .dropdown {
-    width: 336px;
+    max-width: 336px;
 
 }
 .purpose {
     margin: 0px;
-    display:flex;
-    flex-wrap: wrap;
-    align-items: center;
+    text-align: center;
 }
 
 .purpose p {
     margin: 0px;
-    padding: 16px 0 0 0;
+    padding: 16px 18px 0 18px;
     font-size: 38px;
     background-color: rgb(180, 204, 235);
     height: 140px;
@@ -69,11 +85,20 @@ header h1 {
     
 }
 
-@media screen and (max-width: 380px) {
+
+
+@media screen and (max-width: 530px) {
     .jumbo h2{
       font-size: 30px;
     }
   }
+
+  @media screen and (max-width: 532px) {
+    .jumbo {
+      height: 180px;
+      background-image: url("../images/travel.jpg");
+  }
+}
 
 
   @media screen and (max-width: 872px) {
@@ -82,8 +107,16 @@ header h1 {
     }
   }
 
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 532px) {
     .purpose p{
       font-size: 22px;
     }
   }
+
+  @media screen and (max-width: 400px) {
+    .purpose {
+  
+    }
+   
+  }
+

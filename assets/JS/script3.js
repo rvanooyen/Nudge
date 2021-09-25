@@ -1,18 +1,511 @@
+// var url = "https://v6.exchangerate-api.com/v6/" + apiKey + "/latest/" + currencyCode;
+
+// // var url = "https://v6.exchangerate-api.com/v6/" + apiKey + "/latest/" + currencyCode;
+
+// var clearCurrency = function() {
+//     var currencyContainerEl = document.getElementById("currency-container");
+//     currencyContainerEl.innerHTML = "";
+// }
+
+// var exchangeRate = function(baseCurrency, currencyCode) {
+//     var apiKey = "6d29c9cf5737b60b45473240";
+//     var url = "https://v6.exchangerate-api.com/v6/" + apiKey + "/pair/" + baseCurrency + "/" + currencyCode;
+//     fetch(url)
+//         .then(function(response) {
+//             if (response.ok) {                
+//                 return response.json();
+//             } else {
+//                 alert("Error: " + response.statusText);
+//             }                       
+//         })
+//         .then(function(response) {
+//             clearCurrency();
+//             console.log(response);
+//             var amountCurrency = document.getElementById("currency-amount").value;
+//             console.log(amountCurrency);
+//             var amount = amountCurrency * response.conversion_rate;
+//             console.log(amount);
+
+//             // creates currency elements
+//             var pElConversionRate = document.createElement("p");
+//             var pElTotalAmt = document.createElement("P");
+//             // var todayForecastEl = document.createElement("div");
+//             // var cityEl = document.createElement("p");
+//             // var imgEl = document.createElement("img");
+//             // var tempEl = document.createElement("p");
+//             // var windEl = document.createElement("p");
+//             // var humidityEl = document.createElement("p");
+//             // var uvIndexEl = document.createElement("P");
+//             // var fiveDayEl = document.createElement("div");
+//             // var fiveDayTitleEl = document.createElement("h3");
+//             // var cardDivEl = document.createElement("div");                                
+
+//             // sets currency properties
+//             pElConversionRate.setAttribute("id", "conversion-rate");
+//             pElConversionRate.textContent = "one " + baseCurrency + " = " + response.conversion_rate + " " + currencyCode;
+//             pElTotalAmt.setAttribute("id", "total-amount");
+//             pElTotalAmt.textContent = "You have " + amount + currencyCode;
+//             // todayForecastEl.setAttribute("id", "today-forecast");
+//             // cityEl.setAttribute("id", "city-element");
+//             // cityEl.setAttribute("class", "city-element");
+//             // cityEl.textContent = city + "(" + moment().format("l") + ")";
+//             // imgEl.setAttribute("src", "http://openweathermap.org/img/wn/" + response.daily[0].weather[0].icon + ".png");                                                
+            
+//             // // appends current currency to HTML
+//             $("#currency-container").append(pElConversionRate);
+//             $("#currency-container").append(pElTotalAmt);                       
+//         });
+// }
+// var url = "https://v6.exchangerate-api.com/v6/" + apiKey + "/latest/" + currencyCode;
+
+var clearCurrency = function() {
+    var currencyContainerEl = document.getElementById("currency-container");
+    currencyContainerEl.innerHTML = "";
+}
+
+var exchangeRate = function(baseCurrency, currencyCode) {
+    var apiKey = "6d29c9cf5737b60b45473240";
+    var url = "https://v6.exchangerate-api.com/v6/" + apiKey + "/pair/" + baseCurrency + "/" + currencyCode;
+    fetch(url)
+        .then(function(response) {
+            if (response.ok) {                
+                return response.json();
+            } else {
+                alert("Error: " + response.statusText);
+            }                       
+        })
+        .then(function(response) {
+            clearCurrency();
+            console.log(response);
+            var amountCurrency = document.getElementById("currency-amount").value;
+            console.log(amountCurrency);
+            var amount = amountCurrency * response.conversion_rate;
+            console.log(amount);
+
+            // creates currency elements
+            var pElConversionRate = document.createElement("p");
+            var pElTotalAmt = document.createElement("P");                                         
+
+            // sets currency properties
+            pElConversionRate.setAttribute("id", "conversion-rate");
+            pElConversionRate.textContent = "one " + baseCurrency + " = " + response.conversion_rate + " " + currencyCode;
+            pElTotalAmt.setAttribute("id", "total-amount");
+            pElTotalAmt.textContent = "You have " + amount + currencyCode;     
+            
+            // appends current currency to HTML
+            $("#currency-container").append(pElConversionRate);
+            $("#currency-container").append(pElTotalAmt);                       
+        });
+};
+
+var saveBucketList = function(country) {
+    localStorage.setItem("country", country);
+};
+
+// $("#currency-btn").on("click", function(event) {
+//     // Resets the form
+
+//     // Prevents default behaviour
+//     event.preventDefault();
+    
+//     // get values from text fields
+//     var baseCurrency = document.getElementById("currency-base").value;    
+//     var currencyCode = document.getElementById("currency-convert").value;    
+        
+//     exchangeRate(baseCurrency, currencyCode);   
+// });
+
+
+//************************************************************
+
+// var response = fetch("https://api.teleport.org/api/cities/?search=Austin");
+// console.log(response);
+
+
+
+// var getTeleportCity = function (){
+//     fetch("https://api.teleport.org/api/cities/?search=Austin").then(function(response){
+//         response.json().then(function(data){
+//             console.log(data);
+//         })
+       
+//     });
+
+// };
+
+// getTeleportCity();
+
+
+
+
+var cityFormEl = document.querySelector("#city-form");
+var nameInputEl = document.querySelector("#city-name");
+
+var cityContainerEl = document.querySelector("#city-container");
+var citySearchTerm = document.querySelector("#city-search-term");
+
+// var fidgetContainerEl = document.querySelector("#fidget-container");
+
+
+var formSubmitHandler = function(event) {
+
+    // prevent page from refreshing
+    event.preventDefault();
+
+    // get value from input element
+
+    var city = nameInputEl.value.trim();
+
+    if (city) {
+        getTeleportCity(city);
+        nameInputEl.value = "";
+    } else {
+        alert ("Invalid City Name. Please try it again.")
+    }
+    console.log(event);
+};
+
+var getTeleportCity = function (city){
+
+    //original city list
+
+    // var apiURL = "https://api.teleport.org/api/cities/?search=" + city +"&embed=/city:country";
+    // var apiURL = "https://api.teleport.org/api/cities/?search=" + city +"_embedded_" +city + ":country";
+
+    // this will give the country list
+    // var apiURL = "https://api.teleport.org/api/countries/?search=" + city ;
+
+
+
+    // this will give the currency code with console.log on line 150
+
+    var apiURL = "https://api.teleport.org/api/countries/iso_alpha2:" + city + "/";
+
+    
+
+
+    fetch(apiURL)
+    .then(function(response){
+        if (response.ok) {
+            return response.json();
+
+        }else {
+            alert("Error: " + response.statusText);
+        }
+    })
+
+    .then(function(data){
+        displayCityInfo(data,city);
+        console.log(data.currency_code);
+        console.log(data.name);
+    });
+};
+ var currencyCode = data.currency_code;
+ var countryName = data.name;
+ 
+
+
+var displayCityInfo = function(city, searchTerm){
+    console.log(city);
+    console.log(searchTerm);
+
+    // clear old content
+    cityContainerEl.textContent = "";
+    citySearchTerm.textContent= searchTerm;
+
+
+
+    var cityName = "";
+    
+
+    //create a container 
+
+    var cityEl = document.createElement("div");
+    cityEl.classList="";
+
+    // create a span element to hold city title
+    var cityTitleEl = document.createElement("span");
+    cityTitleEl.textContent = cityName
+
+     // append to container
+     cityEl.appendChild(cityTitleEl);
+
+     // append container to the dom
+ 
+     cityContainerEl.appendChild(cityEl);
+
+
+
+
+
+
+
+
+};
+
+// event listeners will go here 
+
+cityFormEl.addEventListener("submit", formSubmitHandler);
+
 // All countries
 // length 252
-var homeCountry = document.getElementById("select-country");
-var destCountry = document.getElementById("destination-country");
-var homeMsg = document.getElementById("home-msg");
-var destMsg = document.getElementById("dest-msg");
-var userFormEl = document.querySelector("#user-form");
-var homeInfo = document.getElementById("home-data");
-var destInfo = document.getElementById("dest-data");
-var homeCurrency;
-var destCurrency;
-var convertRate;
-var amountCurrency = document.getElementById("currency-amount");
-var currencyContainerEl = document.getElementById("currency-container");
-var currencyEntry = document.getElementById("entry-container");
+var countries = [
+    {"name":"Afghanistan","currency":"AFN"},
+    {"name":"Aland Islands","currency":"EUR"},
+    {"name":"Albania","currency":"ALL"},
+    {"name":"Algeria","currency":"DZD"},
+    {"name":"American Samoa","currency":"USD"},
+    {"name":"Andorra","currency":"EUR"},
+    {"name":"Angola","currency":"AOA"},
+    {"name":"Anguilla","currency":"XCD"},
+    {"name":"Antarctica","currency":"AAD"},
+    {"name":"Antigua and Barbuda","currency":"XCD"},
+    {"name":"Argentina","currency":"ARS"},
+    {"name":"Armenia","currency":"AMD"},
+    {"name":"Aruba","currency":"AWG"},
+    {"name":"Australia","currency":"AUD"},
+    {"name":"Austria","currency":"EUR"},
+    {"name":"Azerbaijan","currency":"AZN"},
+    {"name":"Bahamas","currency":"BSD"},
+    {"name":"Bahrain","currency":"BHD"},
+    {"name":"Bangladesh","currency":"BDT"},
+    {"name":"Barbados","currency":"BBD"},
+    {"name":"Belarus","currency":"BYN"},
+    {"name":"Belgium","currency":"EUR"},
+    {"name":"Belize","currency":"BZD"},
+    {"name":"Benin","currency":"XOF"},
+    {"name":"Bermuda","currency":"BMD"},
+    {"name":"Bhutan","currency":"BTN"},
+    {"name":"Bolivia","currency":"BOB"},
+    {"name":"Bonaire, Sint Eustatius and Saba","currency":"USD"},
+    {"name":"Bosnia and Herzegovina","currency":"BAM"},
+    {"name":"Botswana","currency":"BWP"},
+    {"name":"Bouvet Island","currency":"NOK"},
+    {"name":"Brazil","currency":"BRL"},
+    {"name":"British Indian Ocean Territory","currency":"USD"},
+    {"name":"Brunei Darussalam","currency":"BND"},
+    {"name":"Bulgaria","currency":"BGN"},
+    {"name":"Burkina Faso","currency":"XOF"},
+    {"name":"Burundi","currency":"BIF"},
+    {"name":"Cambodia","currency":"KHR"},
+    {"name":"Cameroon","currency":"XAF"},
+    {"name":"Canada","currency":"CAD"},
+    {"name":"Cape Verde","currency":"CVE"},
+    {"name":"Cayman Islands","currency":"KYD"},
+    {"name":"Central African Republic","currency":"XAF"},
+    {"name":"Chad","currency":"XAF"},
+    {"name":"Chile","currency":"CLP"},
+    {"name":"China","currency":"CNY"},
+    {"name":"Christmas Island","currency":"AUD"},
+    {"name":"Cocos (Keeling) Islands","currency":"AUD"},
+    {"name":"Colombia","currency":"COP"},
+    {"name":"Comoros","currency":"KMF"},
+    {"name":"Congo","currency":"XAF"},
+    {"name":"Congo, Democratic Republic of the Congo","currency":"CDF"},
+    {"name":"Cook Islands","currency":"NZD"},
+    {"name":"Costa Rica","currency":"CRC"},
+    {"name":"Cote D'Ivoire","currency":"XOF"},
+    {"name":"Croatia","currency":"HRK"},
+    {"name":"Cuba","currency":"CUP"},
+    {"name":"Curacao","currency":"ANG"},
+    {"name":"Cyprus","currency":"EUR"},
+    {"name":"Czech Republic","currency":"CZK"},
+    {"name":"Denmark","currency":"DKK"},
+    {"name":"Djibouti","currency":"DJF"},
+    {"name":"Dominica","currency":"XCD"},
+    {"name":"Dominican Republic","currency":"DOP"},
+    {"name":"Ecuador","currency":"USD"},
+    {"name":"Egypt","currency":"EGP"},
+    {"name":"El Salvador","currency":"USD"},
+    {"name":"Equatorial Guinea","currency":"XAF"},
+    {"name":"Eritrea","currency":"ERN"},
+    {"name":"Estonia","currency":"EUR"},
+    {"name":"Ethiopia","currency":"ETB"},
+    {"name":"Falkland Islands (Malvinas)","currency":"FKP"},
+    {"name":"Faroe Islands","currency":"DKK"},
+    {"name":"Fiji","currency":"FJD"},
+    {"name":"Finland","currency":"EUR"},
+    {"name":"France","currency":"EUR"},
+    {"name":"French Guiana","currency":"EUR"},
+    {"name":"French Polynesia","currency":"XPF"},
+    {"name":"French Southern Territories","currency":"EUR"},
+    {"name":"Gabon","currency":"XAF"},
+    {"name":"Gambia","currency":"GMD"},
+    {"name":"Georgia","currency":"GEL"},
+    {"name":"Germany","currency":"EUR"},
+    {"name":"Ghana","currency":"GHS"},
+    {"name":"Gibraltar","currency":"GIP"},
+    {"name":"Greece","currency":"EUR"},
+    {"name":"Greenland","currency":"DKK"},
+    {"name":"Grenada","currency":"XCD"},
+    {"name":"Guadeloupe","currency":"EUR"},
+    {"name":"Guam","currency":"USD"},
+    {"name":"Guatemala","currency":"GTQ"},
+    {"name":"Guernsey","currency":"GBP"},
+    {"name":"Guinea","currency":"GNF"},
+    {"name":"Guinea-Bissau","currency":"XOF"},
+    {"name":"Guyana","currency":"GYD"},
+    {"name":"Haiti","currency":"HTG"},
+    {"name":"Heard Island and Mcdonald Islands","currency":"AUD"},
+    {"name":"Holy See (Vatican City State)","currency":"EUR"},
+    {"name":"Honduras","currency":"HNL"},
+    {"name":"Hong Kong","currency":"HKD"},
+    {"name":"Hungary","currency":"HUF"},
+    {"name":"Iceland","currency":"ISK"},
+    {"name":"India","currency":"INR"},
+    {"name":"Indonesia","currency":"IDR"},
+    {"name":"Iran, Islamic Republic of","currency":"IRR"},
+    {"name":"Iraq","currency":"IQD"},
+    {"name":"Ireland","currency":"EUR"},
+    {"name":"Isle of Man","currency":"GBP"},
+    {"name":"Israel","currency":"ILS"},
+    {"name":"Italy","currency":"EUR"},
+    {"name":"Jamaica","currency":"JMD"},
+    {"name":"Japan","currency":"JPY"},
+    {"name":"Jersey","currency":"GBP"},
+    {"name":"Jordan","currency":"JOD"},
+    {"name":"Kazakhstan","currency":"KZT"},
+    {"name":"Kenya","currency":"KES"},
+    {"name":"Kiribati","currency":"AUD"},
+    {"name":"Korea, Democratic People's Republic of","currency":"KPW"},
+    {"name":"Korea, Republic of","currency":"KRW"},
+    {"name":"Kosovo","currency":"EUR"},
+    {"name":"Kuwait","currency":"KWD"},
+    {"name":"Kyrgyzstan","currency":"KGS"},
+    {"name":"Lao People's Democratic Republic","currency":"LAK"},
+    {"name":"Latvia","currency":"EUR"},
+    {"name":"Lebanon","currency":"LBP"},
+    {"name":"Lesotho","currency":"LSL"},
+    {"name":"Liberia","currency":"LRD"},
+    {"name":"Libyan Arab Jamahiriya","currency":"LYD"},
+    {"name":"Liechtenstein","currency":"CHF"},
+    {"name":"Lithuania","currency":"EUR"},
+    {"name":"Luxembourg","currency":"EUR"},
+    {"name":"Macao","currency":"MOP"},
+    {"name":"Macedonia, the Former Yugoslav Republic of","currency":"MKD"},
+    {"name":"Madagascar","currency":"MGA"},
+    {"name":"Malawi","currency":"MWK"},
+    {"name":"Malaysia","currency":"MYR"},
+    {"name":"Maldives","currency":"MVR"},
+    {"name":"Mali","currency":"XOF"},
+    {"name":"Malta","currency":"EUR"},
+    {"name":"Marshall Islands","currency":"USD"},
+    {"name":"Martinique","currency":"EUR"},
+    {"name":"Mauritania","currency":"MRO"},
+    {"name":"Mauritius","currency":"MUR"},
+    {"name":"Mayotte","currency":"EUR"},
+    {"name":"Mexico","currency":"MXN"},
+    {"name":"Micronesia, Federated States of","currency":"USD"},
+    {"name":"Moldova, Republic of","currency":"MDL"},
+    {"name":"Monaco","currency":"EUR"},
+    {"name":"Mongolia","currency":"MNT"},
+    {"name":"Montenegro","currency":"EUR"},
+    {"name":"Montserrat","currency":"XCD"},
+    {"name":"Morocco","currency":"MAD"},
+    {"name":"Mozambique","currency":"MZN"},
+    {"name":"Myanmar","currency":"MMK"},
+    {"name":"Namibia","currency":"NAD"},
+    {"name":"Nauru","currency":"AUD"},
+    {"name":"Nepal","currency":"NPR"},
+    {"name":"Netherlands","currency":"EUR"},
+    {"name":"Netherlands Antilles","currency":"ANG"},
+    {"name":"New Caledonia","currency":"XPF"},
+    {"name":"New Zealand","currency":"NZD"},
+    {"name":"Nicaragua","currency":"NIO"},
+    {"name":"Niger","currency":"XOF"},
+    {"name":"Nigeria","currency":"NGN"},
+    {"name":"Niue","currency":"NZD"},
+    {"name":"Norfolk Island","currency":"AUD"},
+    {"name":"Northern Mariana Islands","currency":"USD"},
+    {"name":"Norway","currency":"NOK"},
+    {"name":"Oman","currency":"OMR"},
+    {"name":"Pakistan","currency":"PKR"},
+    {"name":"Palau","currency":"USD"},
+    {"name":"Palestinian Territory, Occupied","currency":"ILS"},
+    {"name":"Panama","currency":"PAB"},
+    {"name":"Papua New Guinea","currency":"PGK"},
+    {"name":"Paraguay","currency":"PYG"},
+    {"name":"Peru","currency":"PEN"},
+    {"name":"Philippines","currency":"PHP"},
+    {"name":"Pitcairn","currency":"NZD"},
+    {"name":"Poland","currency":"PLN"},
+    {"name":"Portugal","currency":"EUR"},
+    {"name":"Puerto Rico","currency":"USD"},
+    {"name":"Qatar","currency":"QAR"},
+    {"name":"Reunion","currency":"EUR"},
+    {"name":"Romania","currency":"RON"},
+    {"name":"Russian Federation","currency":"RUB"},
+    {"name":"Rwanda","currency":"RWF"},
+    {"name":"Saint Barthelemy","currency":"EUR"},
+    {"name":"Saint Helena","currency":"SHP"},
+    {"name":"Saint Kitts and Nevis","currency":"XCD"},
+    {"name":"Saint Lucia","currency":"XCD"},
+    {"name":"Saint Martin","currency":"EUR"},
+    {"name":"Saint Pierre and Miquelon","currency":"EUR"},
+    {"name":"Saint Vincent and the Grenadines","currency":"XCD"},
+    {"name":"Samoa","currency":"WST"},
+    {"name":"San Marino","currency":"EUR"},
+    {"name":"Sao Tome and Principe","currency":"STD"},
+    {"name":"Saudi Arabia","currency":"SAR"},
+    {"name":"Senegal","currency":"XOF"},
+    {"name":"Serbia","currency":"RSD"},
+    {"name":"Serbia and Montenegro","currency":"RSD"},
+    {"name":"Seychelles","currency":"SCR"},
+    {"name":"Sierra Leone","currency":"SLL"},
+    {"name":"Singapore","currency":"SGD"},
+    {"name":"Sint Maarten","currency":"ANG"},
+    {"name":"Slovakia","currency":"EUR"},
+    {"name":"Slovenia","currency":"EUR"},
+    {"name":"Solomon Islands","currency":"SBD"},
+    {"name":"Somalia","currency":"SOS"},
+    {"name":"South Africa","currency":"ZAR"},
+    {"name":"South Georgia and the South Sandwich Islands","currency":"GBP"},
+    {"name":"South Sudan","currency":"SSP"},
+    {"name":"Spain","currency":"EUR"},
+    {"name":"Sri Lanka","currency":"LKR"},
+    {"name":"Sudan","currency":"SDG"},
+    {"name":"Suriname","currency":"SRD"},
+    {"name":"Svalbard and Jan Mayen","currency":"NOK"},
+    {"name":"Swaziland","currency":"SZL"},
+    {"name":"Sweden","currency":"SEK"},
+    {"name":"Switzerland","currency":"CHF"},
+    {"name":"Syrian Arab Republic","currency":"SYP"},
+    {"name":"Taiwan, Province of China","currency":"TWD"},
+    {"name":"Tajikistan","currency":"TJS"},
+    {"name":"Tanzania, United Republic of","currency":"TZS"},
+    {"name":"Thailand","currency":"THB"},
+    {"name":"Timor-Leste","currency":"USD"},
+    {"name":"Togo","currency":"XOF"},
+    {"name":"Tokelau","currency":"NZD"},
+    {"name":"Tonga","currency":"TOP"},
+    {"name":"Trinidad and Tobago","currency":"TTD"},
+    {"name":"Tunisia","currency":"TND"},
+    {"name":"Turkey","currency":"TRY"},
+    {"name":"Turkmenistan","currency":"TMT"},
+    {"name":"Turks and Caicos Islands","currency":"USD"},
+    {"name":"Tuvalu","currency":"AUD"},
+    {"name":"Uganda","currency":"UGX"},
+    {"name":"Ukraine","currency":"UAH"},
+    {"name":"United Arab Emirates","currency":"AED"},
+    {"name":"United Kingdom","currency":"GBP"},
+    {"name":"United States","currency":"USD"},
+    {"name":"United States Minor Outlying Islands","currency":"USD"},
+    {"name":"Uruguay","currency":"UYU"},
+    {"name":"Uzbekistan","currency":"UZS"},
+    {"name":"Vanuatu","currency":"VUV"},
+    {"name":"Venezuela","currency":"VEF"},
+    {"name":"Viet Nam","currency":"VND"},
+    {"name":"Virgin Islands, British","currency":"USD"},
+    {"name":"Virgin Islands, U.s.","currency":"USD"},
+    {"name":"Wallis and Futuna","currency":"XPF"},
+    {"name":"Western Sahara","currency":"MAD"},
+    {"name":"Yemen","currency":"YER"},
+    {"name":"Zambia","currency":"ZMW"},
+    {"name":"Zimbabwe","currency":"ZWL"}
+];
+
+// All countries with countries.name, countries.code, countries.currency code
+// length 252
 var countries = [
     {"name":"Afghanistan","code":"AF","currency":"AFN"},
     {"name":"Aland Islands","code":"AX","currency":"EUR"},
@@ -267,307 +760,23 @@ var countries = [
     {"name":"Zambia","code":"ZM","currency":"ZMW"},
     {"name":"Zimbabwe","code":"ZW","currency":"ZWL"}
 ];
-
-// console.log(countries[0].currency);
-
-
-
-
-// var selectEl = document.createElement('select');
-// document.getElementsByTagName('body')[0].appendChild(selectEl);
-
-/* for (var i=0; i< countries.length; i++) {
-    var optionEl = document.createElement('option');
-    optionEl.setAttribute('class', 'selected');
-
-    if (i == 0) {
-        optionEl.setAttribute('disabled', 'disabled');
-        optionEl.setAttribute('selected', 'selected');
+var loadBucketList = function() {
+    var savedLocales = localStorage.getItem("country");
+    // if there are no tasks, set tasks to an empty array and return out of the function
+    if (!savedTasks) {
+      return false;
     }
-
-    var optionElText = document.createTextNode(countries[i].name);
-    optionEl.appendChild(optionElText);
-    //optionElText.
-    
-    //optionEl.append(countries[i].name).val();
-
-    document.getElementsByTagName('select')[0].appendChild(optionEl);
-    
-}; */
-
-var formSubmitHandler = function(event) {
-    // prevent page from refreshing
-    event.preventDefault();
-  
-    // get value from input element
-    var homeSearch =  homeCountryList.options[homeCountryList.selectedIndex].value;
-    var destSearch =  destCountryList.options[destCountryList.selectedIndex].value;
-     // get value from input element
- 
-  
-    if (homeSearch) {
-       
-        console.log(homeSearch);
-        getHomeCountry(homeSearch);
-     // getCurrentWeather(citySearch);
-     // getForecastWeather(citySearch);
-     // storeCity(citySearch);
-  
-      // clear old content
-    //repoContainerEl.textContent = "";
-    //nameInputEl.value = "";
-     homeMsg.innerHTML ="";
-    } else {
-      homeMsg.innerHTML = "Please select a home country.";
-      homeMsg.className = "red";
-     // alert("Please select a City");
-    }
-    if (destSearch) {
-        getDestCountry(destSearch);
-        console.log(destSearch);
-        
-        destMsg.innerHTML ="";
-    } else {
-      destMsg.innerHTML = "Please select a destination country.";
-      destMsg.className = "red";
+    console.log("Saved tasks found!");
      
-    }
-    if(homeSearch && destSearch){
-        displayAmountEntry();
-        
-       
-    }
-    
-   
-  };
- 
+    // parse into array of objects
+    savedLocales = JSON.parse(savedLocales);
   
-//Create and append home country select list
-var homeCountryList = document.createElement("select");
-homeCountryList.id = "homecountry";
-homeCountryList.className = "dropdown";
-homeCountry.appendChild(homeCountryList);
-var selectHome = document.createElement("option");
-selectHome.value = "";
-selectHome.text = "Please select";
-homeCountryList.appendChild(selectHome);
-homeCountry.appendChild(homeCountryList);
-
-
-//Create and append the options for home country selection
-for (var i = 0; i < countries.length; i++) {
-    var option = document.createElement("option");
-    option.value = countries[i].code;
-    option.text = countries[i].name;
-    homeCountryList.appendChild(option);
-   
-}
-
-//Create and append destination country select list
-var destCountryList = document.createElement("select");
-destCountryList.id = "destcountry";
-destCountryList.className="dropdown";
-destCountry.appendChild(destCountryList);
-var selectDestination = document.createElement("option");
-selectDestination.value = "";
-selectDestination.text = "Please select";
-destCountryList.appendChild(selectDestination);
-destCountry.appendChild(destCountryList);
-
-
-
-//Create and append the options for home country selection
-for (var i = 0; i < countries.length; i++) {
-    var option = document.createElement("option");
-    option.value = countries[i].code;
-    option.text = countries[i].name;
-    destCountryList.appendChild(option);
-   
-}
-
-
-
-
-
-
-
-// do the API call
-var getHomeCountry = function(homeCountryCode) {
-
-
-    var apiCountryUrl =  "https://api.teleport.org/api/countries/iso_alpha2:" + homeCountryCode +"/";
-  
-    // make a get request to url
-    fetch(apiCountryUrl)
-      .then(function(response) {
-        // request was successful
-        if (response.ok) {
-          console.log(response);
-          response.json().then(function(homeCountryData) {
-            console.log(homeCountryData);
-           displayHomeCountry(homeCountryData);
-          });
-        } else {
-          alert("Error: " + response.statusText);
-        }
-      })
-      .catch(function(error) {
-        alert("Unable to connect");
-      });
+    // loop through savedLocales array
+    for (var i = 0; i < savedLocales.length; i++) {
+        var countrylistEl = document.createElement("ul");
+        var countryEl = document.createElement("li");
+        countrylistEl.setAttribute("id", "countries-list");        
+        countryEl.textContent = country;
+        countrylistEl.append(countryEl);
+    }
   };
-
-  var getDestCountry = function(destCountryCode) {
-
-
-    var apiCountryUrl =  "https://api.teleport.org/api/countries/iso_alpha2:" + destCountryCode +"/";
-  
-    // make a get request to url
-    fetch(apiCountryUrl)
-      .then(function(response) {
-        // request was successful
-        if (response.ok) {
-          console.log(response);
-          response.json().then(function(destCountryData) {
-            console.log(destCountryData);
-            displayDestCountry(destCountryData);
-          });
-        } else {
-          alert("Error: " + response.statusText);
-        }
-      })
-      .catch(function(error) {
-        alert("Unable to connect");
-      });
-  };
-
-// Display home country data
-var displayHomeCountry = function(homeCountryData) {
-homeInfo.innerHTML= "Home Country: <br>"+homeCountryData.name +", Currency Code :" + homeCountryData.currency_code;
-homeCurrency = homeCountryData.currency_code;
-
-
-}
-
-// Display destination country data
-var displayDestCountry = function(destCountryData) {
-    destInfo.innerHTML= "Destination Country: <br>"+destCountryData.name +", Currency Code :" +destCountryData.currency_code;
-    
-     destCurrency = destCountryData.currency_code;
-     
-     
-    }
-
-    function displayAmountEntry(){
-       
-        var label = document.createElement("Label");
-        label.innerHTML="Please enter an amount:";
-        currencyEntry.appendChild(label);
-        var amountEntry = document.createElement("INPUT");
-     amountEntry .setAttribute("type", "number");
-     amountEntry .id = 'currency-amount';
-     currencyEntry.appendChild(amountEntry );
-    let saveBtn= document.createElement('div');
-    saveBtn.className ='saveBtn';
-    var btn = document.createElement("BUTTON");
-    btn.setAttribute("onclick", "convertRate()");
-    btn.innerHTML = "Convert";
-    btn.setAttribute("type", "submit");
-    saveBtn.appendChild(btn);
-    currencyEntry.appendChild(saveBtn);
-    }
-function convertRate(){
-    
-    exchangeRate(homeCurrency, destCurrency);
-    console.log(homeCurrency);
-    console.log(destCurrency);
-   
-
-}
-    var clearCurrency = function() {
-        var currencyContainerEl = document.getElementById("currency-container");
-        currencyContainerEl.innerHTML = "";
-                
-    }
-    
-    var exchangeRate = function(baseCurrency, currencyCode) {
-        var apiKey = "6d29c9cf5737b60b45473240";
-        var url = "https://v6.exchangerate-api.com/v6/" + apiKey + "/pair/" + baseCurrency + "/" + currencyCode;
-        fetch(url)
-            .then(function(response) {
-                if (response.ok) {                
-                    return response.json();
-                } else {
-                    alert("Error: " + response.statusText);
-                }                       
-            })
-            .then(function(response) {
-                clearCurrency();
-                console.log(response);
-                amountCurrency = document.getElementById("currency-amount").value;
-                console.log(amountCurrency);
-                var amount = amountCurrency * response.conversion_rate;
-                console.log(amount);
-    
-                // creates currency elements
-                var pElConversionRate = document.createElement("p");
-                var pElTotalAmt = document.createElement("P");                                         
-    
-                // sets currency properties
-                pElConversionRate.setAttribute("id", "conversion-rate");
-                pElConversionRate.textContent = "one " + baseCurrency + " = " + response.conversion_rate + " " + currencyCode;
-                pElTotalAmt.setAttribute("id", "total-amount");
-                pElTotalAmt.textContent = "You have " + amount + currencyCode;     
-                
-                // appends current currency to HTML
-                currencyContainerEl.append(pElConversionRate);
-                currencyContainerEl.append(pElTotalAmt);
-               // $("#currency-container").append(pElConversionRate);
-               // $("#currency-container").append(pElTotalAmt);                       
-            });
-    };
-
-/* var teleportCountry;
-
-fetch("https://api.teleport.org/api/countries/iso_alpha2:" + homeCountryCode +"/").then(function(response){
-    if (response.ok) {
-        return response.json();
-    } else {
-        // return Promise.reject(response);
-        return alert("404")
-    }
-}).then(function (data) {
-    // store the country code to a variable
-    teleportCountry = data;
-
-    // convert the homecountry code to currency code
-
-    var homeCountryCurrency = data.currency_code;
-
-    console.log(homeCountryCurrency);
-    console.log(data);
-
-    // fetch the exchange code API
-    var apiKey = "6d29c9cf5737b60b45473240";
-
-    return fetch ("https://v6.exchangerate-api.com/v6/" + apiKey + "/pair/" + destinationCountryCurrency +"/" + homeCountryCurrency);
-}).then(function(response){
-    if (response.ok) {
-        return response.json();
-    }else { 
-        // return Promise.reject(response);
-        return alert("404");
-    }
-}).then (function(data) {
-    console.log(data.conversion_rate);
-    console.log(data);
-}).catch(function (error) {
-    console.warn(error);
-});
- */
-// add event listeners to forms
-userFormEl.addEventListener("submit", formSubmitHandler);
-
-//displayAmountEntry();
-
-
-
