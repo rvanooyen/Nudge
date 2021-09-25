@@ -486,6 +486,7 @@ var exchangeRate = function(baseCurrency, currencyCode) {
       amountCurrency = document.getElementById("currency-amount").value;
       console.log(amountCurrency);
       var amount = amountCurrency * response.conversion_rate;
+      amount = Math.round(amount);
       console.log(amount);
 
       // creates currency elements
