@@ -16,54 +16,60 @@
 </head>
 
 <body>
+    <!-- header with logo-->
     <header>
         <h1>Nudge</h1>
     </header>
-
+    <!--large immage with  tagline-->
     <div class="jumbo">
         <h2>Why Not Travel The World?</h2>
     </div>
+
     <div class="purpose">
         <p>If you fear traveling, we are here to help make your destination dreams come true. Learn about quality of
             life, cost of living and currency exchange for free!</p>
     </div>
-
+    <!--contain main divs-->
     <div class="contain">
         <form id="user-form" class="pure-form">
+            <!--home country dropdown-->
             <div>
-                <p>Select your home country:</p>
+                <p>Select your departure country:</p>
             </div>
             <div id="select-country"></div>
-            <div id="home-msg"></div>
             <div>
+                <!--destination country dropdown-->
                 <p> Select your destination country:</p>
             </div>
             <div id="destination-country"></div>
-            <div id="dest-msg"></div>
+            <!--search button-->
             <button type="submit" id="select-btn" class="pure-button rounded">Search</button>
-            <div id="select-btn" class="modal">
+            <!-- modal div -->
+            <div id="modal" class="modal">
                 <!-- Modal content -->
-                <div id="modal-content">
+                <div class="modal-content">
                     <span id="close">&times;</span>
                     <p>Please select a Country</p>
                 </div>
+                <!--end modal-->
             </div>
+            <!--display currency exchange data-->
             <div id="home-data"></div>
             <div id="dest-data"></div>
             <div id="currency-container"></div>
         </form>
+        <!--enter currency ifnformation-->
         <div id="entry-container" class="hidden">
-            <label class="amount"> Please enter an amount:</label>
+            <label class="amount"> Please enter a currency amount:</label>
             <input type="number" id="currency-amount">
             <button type="submit" class="pure-button rounded" onclick="convertRate()">Convert</button>
         </div>
+        <!--saved home and destination countries-->
         <div id="saved-country"></div>
-    </div>
-
+        <!--end container-->
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="./assets/JS/script.js"></script>   
-
+    <script src="./assets/JS/script.js"></script>
 </body>
 
 </html>

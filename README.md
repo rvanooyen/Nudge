@@ -16,7 +16,6 @@ A travel website that allows a user to select a country of origin and destinatio
 ![nudge-screen](https://user-images.githubusercontent.com/87504797/134782627-403102a7-8237-45ec-8ad8-939ed9039282.jpg)
 
 
-
 ## Github 
 https://github.com/rvanooyen/Nudge/
 
