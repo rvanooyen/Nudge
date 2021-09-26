@@ -1,5 +1,4 @@
-// All countries
-// length 252
+//global variables
 var homeCountry = document.getElementById("select-country");
 var destCountry = document.getElementById("destination-country");
 var homeMsg = document.getElementById("home-msg");
@@ -270,15 +269,15 @@ var countries = [
   { "name": "Zimbabwe", "code": "ZW", "currency": "ZWL" }
 ];
 
-
 //checking for local storage
 if (JSON.parse(window.localStorage.getItem('countryList'))) {
-  saveCountries = JSON.parse(window.localStorage.getItem('countryList'));    
+  saveCountries = JSON.parse(window.localStorage.getItem('countryList'));
 }
 else {
   saveCountries = [];
 }
 
+//display saved destinations
 displayCountries();
 
 var formSubmitHandler = function (event) {
@@ -290,53 +289,74 @@ var formSubmitHandler = function (event) {
   var homeText = homeCountryList.options[homeCountryList.selectedIndex].text;
   var destSearch = destCountryList.options[destCountryList.selectedIndex].value;
   var destText = destCountryList.options[destCountryList.selectedIndex].text;
- 
+
   // get value from input element
-
-
   if (homeSearch) {
     console.log(homeSearch);
     getHomeCountry(homeSearch);
-   // homeMsg.innerHTML = "";
-  } else {
-    //homeMsg.innerHTML = "Please select a home country.";
-   // homeMsg.className = "red";
-   // Get the modal
-var modal = document.getElementById("modal-content");
-
-// Get the button that opens the modal
-var btn = document.getElementsById("select-btn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementById("close");
-
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
- //alert("test");
-  modal.style.display = "block";
- 
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-   modal.style.display = "none";
   }
-}
+
+  else {;
+    // Get the modal
+    var modal = document.getElementById("modal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("select-btn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementById("close");
+
+    // When the user clicks on the button, open the modal
+    modal.style.display = "block";
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
   }
+  // get value from input element
   if (destSearch) {
     getDestCountry(destSearch);
     console.log(destSearch);
 
-    destMsg.innerHTML = "";
-  } else {
-    destMsg.innerHTML = "Please select a destination country.";
-    destMsg.className = "red";
+  }
+  else {
+    var modal = document.getElementById("modal");
 
+    // Get the button that opens the modal
+    var btn = document.getElementById("select-btn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementById("close");
+
+    // When the user clicks on the button, open the modal
+    modal.style.display = "block";
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  }
+
+  //get destinations store data
+  if (destSearch) {
+    getDestCountry(destSearch);
+    console.log(destSearch);
+//store search results
   }
   if (homeSearch && destSearch) {
     storeCountries(homeSearch, destSearch, homeText, destText);
@@ -344,7 +364,7 @@ window.onclick = function(event) {
   }
 };
 
-//Create and append home country select list
+//create and append home country select list
 var homeCountryList = document.createElement("select");
 homeCountryList.id = "homecountry";
 homeCountryList.className = "dropdown";
@@ -355,17 +375,15 @@ selectHome.text = "Please select";
 homeCountryList.appendChild(selectHome);
 homeCountry.appendChild(homeCountryList);
 
-
-//Create and append the options for home country selection
+//create and append the options for home country selection
 for (var i = 0; i < countries.length; i++) {
   var option = document.createElement("option");
   option.value = countries[i].code;
   option.text = countries[i].name;
   homeCountryList.appendChild(option);
-
 }
 
-//Create and append destination country select list
+//create and append destination country select list
 var destCountryList = document.createElement("select");
 destCountryList.id = "destcountry";
 destCountryList.className = "dropdown";
@@ -376,22 +394,19 @@ selectDestination.text = "Please select";
 destCountryList.appendChild(selectDestination);
 destCountry.appendChild(destCountryList);
 
-
-
-//Create and append the options for home country selection
+//create and append the options for destination country selection
 for (var i = 0; i < countries.length; i++) {
   var option = document.createElement("option");
   option.value = countries[i].code;
   option.text = countries[i].name;
   destCountryList.appendChild(option);
-
 }
 
-// do the API call
+// retrieve home country results from API call
 var getHomeCountry = function (homeCountryCode) {
   var apiCountryUrl = "https://api.teleport.org/api/countries/iso_alpha2:" + homeCountryCode + "/";
 
-  // make a get request to url
+  // make a get request to url for country
   fetch(apiCountryUrl)
     .then(function (response) {
       // request was successful
@@ -409,13 +424,12 @@ var getHomeCountry = function (homeCountryCode) {
       alert("Unable to connect");
     });
 };
-
+// retrieve destination country results from API call
 var getDestCountry = function (destCountryCode) {
-
 
   var apiCountryUrl = "https://api.teleport.org/api/countries/iso_alpha2:" + destCountryCode + "/";
 
-  // make a get request to url
+  // make a fetch request to API
   fetch(apiCountryUrl)
     .then(function (response) {
       // request was successful
@@ -437,7 +451,7 @@ var getDestCountry = function (destCountryCode) {
 // Display home country data
 var displayHomeCountry = function (homeCountryData) {
   homeInfo.innerHTML = "<p>" + homeCountryData.name + ", Currency: " + homeCountryData.currency_code + "</p>";
-  homeInfo.className ="home-country";
+  homeInfo.className = "home-country";
   homeCurrency = homeCountryData.currency_code;
 
 
@@ -445,31 +459,35 @@ var displayHomeCountry = function (homeCountryData) {
 
 // Display destination country data
 var displayDestCountry = function (destCountryData) {
-  destInfo.innerHTML ="<p>" +  destCountryData.name + ", Currency: " + destCountryData.currency_code + "</p>";
-  destInfo.className ="dest-country";
+  destInfo.innerHTML = "<p>" + destCountryData.name + ", Currency: " + destCountryData.currency_code + "</p>";
+  destInfo.className = "dest-country";
   destCurrency = destCountryData.currency_code;
 
 
 }
+// Make display amount empty
 
 function displayAmountEntry() {
-  currencyEntry.className="";
+  currencyEntry.className = "";
 }
-function convertRate() {
 
+//converet data
+function convertRate() {
   exchangeRate(homeCurrency, destCurrency);
   console.log(homeCurrency);
   console.log(destCurrency);
 
 
 }
+//clear the button
 var clearCurrency = function () {
   var currencyContainerEl = document.getElementById("currency-container");
   currencyContainerEl.innerHTML = "";
 
 }
 
-var exchangeRate = function(baseCurrency, currencyCode) {
+//fetch exchancge API
+var exchangeRate = function (baseCurrency, currencyCode) {
   var apiKey = "6d29c9cf5737b60b45473240";
   var url = "https://v6.exchangerate-api.com/v6/" + apiKey + "/pair/" + baseCurrency + "/" + currencyCode;
   fetch(url)
@@ -497,77 +515,72 @@ var exchangeRate = function(baseCurrency, currencyCode) {
       pElConversionRate.setAttribute("id", "conversion-rate");
       pElConversionRate.textContent = "One " + baseCurrency + " = " + response.conversion_rate + " " + currencyCode;
       pElTotalAmt.setAttribute("id", "total-amount");
-      pElTotalAmt.textContent = "You have " + amount + " " +currencyCode;
+      pElTotalAmt.textContent = "You have " + amount + " " + currencyCode;
 
       // appends current currency to HTML
       currencyContainerEl.append(pElConversionRate);
       currencyContainerEl.append(pElTotalAmt);
-      // $("#currency-container").append(pElConversionRate);
-      // $("#currency-container").append(pElTotalAmt);                       
+
     });
 };
 
 
-// function to store city searches
+// function to store country searches
 function storeCountries(homeSearch, destSearch, homeText, destText) {
   const countryDataObj = {
-      home: homeSearch,
-      homeName: homeText,
-      destination: destSearch,
-      destName: destText
-      
+    home: homeSearch,
+    homeName: homeText,
+    destination: destSearch,
+    destName: destText
+
   }
-  
-   saveCountries.push(countryDataObj);
-   console.log(saveCountries);
-   window.localStorage.setItem('countryList', JSON.stringify(saveCountries));
-   window.localStorage.getItem('countryList');
-    JSON.parse(window.localStorage.getItem('countryList'));
-   
-    
-    displayCountries();
-  
+//display countries
+  saveCountries.push(countryDataObj);
+  console.log(saveCountries);
+  window.localStorage.setItem('countryList', JSON.stringify(saveCountries));
+  window.localStorage.getItem('countryList');
+  JSON.parse(window.localStorage.getItem('countryList'));
+
+  displayCountries();
+
 }
 
-
+//checking for duplicates in stored array (code from stack overflow)
 function unique(arr, keyProps) {
   const kvArray = arr.map(entry => {
-   const key = keyProps.map(k => entry[k]).join('|');
-   return [key, entry];
+    const key = keyProps.map(k => entry[k]).join('|');
+    return [key, entry];
   });
   const map = new Map(kvArray);
   return Array.from(map.values());
- }
+}
 
-// function to display stored city searches
+// function to display stored country searches
 function displayCountries() {
 
-  console.log(unique(saveCountries, ['home', 'destName','homeName','destination']));
+  console.log(unique(saveCountries, ['home', 'destName', 'homeName', 'destination']));
 
-var uniqueResults = unique(saveCountries, ['home', 'destName','homeName','destination']);
-  
+  var uniqueResults = unique(saveCountries, ['home', 'destName', 'homeName', 'destination']);
+
   var text = '';
   for (var i = 0; i < uniqueResults.length; i++) {
-     
-     var options = text +=  "<button  id=" +uniqueResults[i].destination+  " class = 'pure-button rounded' onclick='searchCountry("+JSON.stringify(uniqueResults[i].home)+"," +JSON.stringify(uniqueResults[i].destination)+" )'>" + uniqueResults[i].homeName+" - "+uniqueResults[i].destName+"</button> <br>";
-     savedResults.innerHTML = options;     
-     
-      
-      }
-      
+
+    var options = text += "<button  id=" + uniqueResults[i].destination + " class = 'pure-button rounded' onclick='searchCountry(" + JSON.stringify(uniqueResults[i].home) + "," + JSON.stringify(uniqueResults[i].destination) + " )'>" + uniqueResults[i].homeName + " - " + uniqueResults[i].destName + "</button> <br>";
+    savedResults.innerHTML = options;
   }
-// retrieve stored city searches
-function searchCountry(home, destination){
-  
- getHomeCountry( home);
- getDestCountry(destination);
- displayAmountEntry();
-  
+
+}
+// retrieve stored country searches
+function searchCountry(home, destination) {
+
+  getHomeCountry(home);
+  getDestCountry(destination);
+  displayAmountEntry();
+
 }
 // add event listeners to forms
 userFormEl.addEventListener("submit", formSubmitHandler);
 
-//displayAmountEntry();
 
 
 

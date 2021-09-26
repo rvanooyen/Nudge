@@ -2,18 +2,12 @@ body {
     padding: 0px;
     background-color: rgb(236, 240, 248);
 }
-
-.red {
-    color:crimson;
-    font-weight: bold;
-    padding: 10px 0px 10px 0px;
-}
-
+/* hide currency input */
 .hidden {
-    display: none;
+    display: none; 
 }
-
-.rounded {
+/* round btn corners */
+.rounded { 
   margin-top: 16px;
   color: white;
   border-radius: 4px;
@@ -21,6 +15,7 @@ body {
   background: rgb(66, 184, 221);
 
 }
+/* main container*/
 .contain {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0 14px 0 16px;
@@ -28,7 +23,7 @@ body {
     margin-bottom: 200px;
     
 }
-
+/* header with backgorund logo */
 header {
     width: 100%;
     background-image: url("../images/globe.png");
@@ -38,11 +33,18 @@ header {
     color:azure;
     height: 90px; 
 }
+header h1 {
+  padding: 30px 0px 0px 60px;
+  margin: 0px;
+  font-family: 'Noto Sans', sans-serif;
+  text-shadow: 2px 2px #070707;
+
+}
+/* large image with backgorund image and tagline */
 .jumbo {
     height: 280px;
     background-image: url("../images/travel.jpg");
     background-size: cover;
-
 }
 
 .jumbo p {
@@ -60,13 +62,7 @@ header {
     text-shadow: 2px 2px #19181b;
 
 }
-header h1 {
-   padding: 30px 0px 0px 60px;
-   margin: 0px;
-   font-family: 'Noto Sans', sans-serif;
-   text-shadow: 2px 2px #070707;
 
-}
 .dropdown {
     max-width: 336px;
 
@@ -86,7 +82,7 @@ header h1 {
     
 }
 
-/* The Modal (background) W# Schools*/
+/* The Modal W3 Schools*/
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -110,15 +106,15 @@ header h1 {
 }
 
 /* The Close Button */
-.close {
+#close {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+#close:hover,
+#close:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
@@ -126,6 +122,7 @@ header h1 {
 
 
 
+/* media query  widths for jumbo and purpose */
 @media screen and (max-width: 530px) {
     .jumbo h2{
       font-size: 30px;
